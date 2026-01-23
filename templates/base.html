@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linx Concept | Portfolio</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        .cursor-dot {
+            width: 8px; height: 8px; background-color: #3b82f6;
+            position: fixed; border-radius: 50%; pointer-events: none;
+            z-index: 9999; transition: transform 0.1s ease;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(2deg); }
+            50% { transform: translateY(-15px) rotate(-1deg); }
+        }
+        .ghibli-float { animation: float 6s ease-in-out infinite; }
+        
+        .project-card-img {
+            width: 100%; height: 350px; object-fit: cover; object-position: top;
+        }
+
+        /* Style Code propre */
+        pre {
+            background: #0f172a !important;
+            padding: 1.5rem !important;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            border: 1px solid #1e293b;
+            margin: 2rem 0;
+        }
+        code { font-family: 'Fira Code', monospace; }
+
+        /* Loader Animation */
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        .loader-bar-inner { animation: progress 1.5s ease-in-out infinite; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans selection:bg-blue-500/30 overflow-x-hidden">
+
+    <div class="cursor-dot hidden md:block" id="cursor"></div>
+
+    <div id="loader" class="fixed inset-0 bg-blue-600 z-[10000] flex flex-col items-center justify-center px-6">
+        <h2 class="text-xl md:text-4xl font-mono font-bold italic text-white tracking-tighter uppercase">
+            LINX_CONCEPT.LOAD()
+        </h2>
+        <div class="w-48 h-1 bg-white/20 mt-4 overflow-hidden">
+            <div class="h-full bg-white loader-bar-inner"></div>
+        </div>
+    </div>
+
+    <canvas id="canvas-code" class="fixed top-0 left-0 w-full h-full -z-10 opacity-10 pointer-events-none"></canvas>
+
+    <nav class="p-4 md:p-6 border-b border-slate-800 bg-slate-950/90 backdrop-blur-md sticky top-0 z-[1000]">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='{% url 'home' %}'">
+                <img src="{% static 'img/logo.jpg' %}" alt="Logo" class="w-10 h-10 rounded-full object-cover border border-blue-500/50">
+                <div class="text-xl font-bold tracking-tighter uppercase">LINX<span class="text-blue-400">.</span></div>
+            </div>
+
+            <div class="flex flex-row space-x-6 md:space-x-8 text-[10px] md:text-sm uppercase tracking-[0.2em] items-center font-bold">
+                <a href="{% url 'home' %}" class="hover:text-blue-400 transition">Portfolio</a>
+                <a href="{% url 'blog_index' %}" class="hover:text-blue-400 transition">Blog</a>
+                <a href="{% url 'contact' %}" class="text-blue-400 border border-blue-500/50 px-3 py-1 md:px-5 md:py-2 hover:bg-blue-500 hover:text-white transition rounded-sm">Contact</a>
+            </div>
+        </div>
+        <div id="progress-bar" class="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-blue-500 to-emerald-500 w-0 transition-all"></div>
+    </nav>
+
+    <main class="min-h-screen">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="mt-32 border-t border-slate-900 bg-black/50 py-16 px-6">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
+            <div class="flex flex-col items-center md:items-start space-y-4">
+                <img src="{% static 'img/logo.jpg' %}" class="w-12 h-12 rounded-full border border-slate-700" alt="Linx Logo">
+                <p class="text-slate-500 text-sm max-w-xs text-center md:text-left">Hybride Graphic Design & Python Web Dev.</p>
+            </div>
+
+            <div class="flex gap-8 text-2xl text-slate-500 justify-center">
+                <a href="https://github.com/Ymax27" target="_blank" class="hover:text-white transition"><i class="fa-brands fa-github"></i></a>
+                <a href="https://youtube.com/@linxgraphix" target="_blank" class="hover:text-red-500 transition"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.linkedin.com/in/young-max-37a2a9334" target="_blank" class="hover:text-blue-500 transition"><i class="fa-brands fa-linkedin"></i></a>   
+            </div>
+
+            <div class="flex flex-col items-center md:items-end space-y-4 font-mono text-sm">
+                <a href="mailto:lindsellmaxwell@gmail.com" class="text-blue-400 underline">lindsellmaxwell@gmail.com</a>
+                <a href="https://wa.me/237650218023" class="bg-white text-black px-6 py-2 text-xs font-bold uppercase hover:bg-emerald-500 hover:text-white transition">WhatsApp</a>
+            </div>
+        </div>
+        <div class="text-center mt-16 text-[10px] font-mono text-slate-700 uppercase tracking-[0.3em]">
+            © 2026 LINX_CONCEPT // MAXWELL
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+    <script>
+        // Loader exit
+        window.addEventListener('load', () => {
+            gsap.to("#loader", { y: "-100%", duration: 1, ease: "expo.inOut", delay: 0.5 });
+        });
+
+        // Scroll progress
+        window.onscroll = () => {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            document.getElementById("progress-bar").style.width = (winScroll / height) * 100 + "%";
+        };
+
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
+        });
+
+        // Matrix Background
+        const canvasCode = document.getElementById('canvas-code');
+        const ctxCode = canvasCode.getContext('2d');
+        canvasCode.width = window.innerWidth; canvasCode.height = window.innerHeight;
+        const codeStrs = ["def", "import", "class", "print", "01", "=>", "python", "linx"];
+        const columns = canvasCode.width / 20;
+        const drops = Array(Math.floor(columns)).fill(1);
+        function drawCode() {
+            ctxCode.fillStyle = 'rgba(2, 6, 23, 0.1)'; ctxCode.fillRect(0, 0, canvasCode.width, canvasCode.height);
+            ctxCode.fillStyle = '#1e293b'; ctxCode.font = '14px monospace';
+            drops.forEach((y, i) => {
+                const txt = codeStrs[Math.floor(Math.random() * codeStrs.length)];
+                ctxCode.fillText(txt, i * 25, y * 15);
+                if (y * 15 > canvasCode.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            });
+        }
+        setInterval(drawCode, 50);
+
+        // Animations Globales
+        gsap.from(".ghibli-float", { duration: 1.5, x: 50, opacity: 0, ease: "power4.out", delay: 1 });
+        
+        // Force Prism
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('pre code').forEach((el) => {
+                if (!el.className.includes('language-')) el.classList.add('language-python');
+                Prism.highlightElement(el);
+            });
+        });
+    </script>
+</body>
+</html>

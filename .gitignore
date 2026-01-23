@@ -1,0 +1,7 @@
+vnc/
+ven/
+__pycache__/
+*.sqlite3
+.DS_Store
+static_root/
+media/

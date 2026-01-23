@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+<article class="max-w-3xl mx-auto px-4 md:px-6 py-12 md:py-24">
+    <div class="mb-8 font-mono text-xs opacity-50 uppercase tracking-widest">
+        <a href="{% url 'blog_index' %}" class="hover:text-blue-400">blog</a> / {{ post.title|truncatechars:20 }}
+    </div>
+
+    <header class="mb-12 md:mb-16 text-center">
+        <span class="text-blue-500 font-mono text-sm uppercase tracking-widest">{{ post.created_at|date:"d F Y" }}</span>
+        <h1 class="text-3xl md:text-6xl font-black mt-4 mb-6 leading-tight tracking-tighter uppercase italic">
+            {{ post.title }}
+        </h1>
+        <div class="h-1 w-20 bg-gradient-to-r from-blue-500 to-emerald-500 mx-auto"></div>
+    </header>
+
+    {% if post.image %} <div class="relative group mb-16 overflow-hidden rounded-sm border border-slate-800">
+        <img src="{{ post.image.url }}" class="w-full h-[300px] md:h-[500px] object-cover grayscale group-hover:grayscale-0 transition duration-1000 scale-105 group-hover:scale-100">
+    </div>
+    {% endif %}
+
+    <div class="prose prose-invert prose-blue max-w-none font-light leading-relaxed text-slate-300 text-base md:text-lg line-numbers">
+        {{ post.content|safe }}
+    </div>
+
+    <div class="mt-20 p-6 md:p-10 border border-slate-800 bg-slate-900/30 rounded-sm flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="flex-1">
+            <h4 class="font-bold text-xl mb-2 italic">Une question technique ?</h4>
+            <p class="text-sm text-slate-400">Si tu as besoin d'un coup de main sur un projet Python ou d'un design hybride, contacte-moi directement.</p>
+        </div>
+        <div class="flex flex-col gap-4 w-full md:w-auto">
+            <a href="https://wa.me/237650218023" class="text-center bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs px-6 py-3 uppercase tracking-widest transition">
+                WhatsApp Me
+            </a>
+            <a href="mailto:lindsellmaxwell@gmail.com" class="text-center border border-slate-700 hover:border-blue-500 text-slate-300 font-mono text-xs px-6 py-3 uppercase tracking-widest transition">
+                Email
+            </a>
+        </div>
+    </div>
+</article>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // On s'assure que chaque bloc <pre> est stylé pour Prism
+        document.querySelectorAll('pre').forEach((block) => {
+            block.classList.add('line-numbers');
+            // On ajoute un bouton de copie rapide
+            const button = document.createElement('button');
+            button.innerText = 'Copier';
+            button.className = 'copy-code-btn';
+            block.style.position = 'relative';
+            block.appendChild(button);
+        });
+    });
+</script>
+
+<style>
+    /* Style pour le bouton copier qui apparaît dans les blocs de code */
+    .copy-code-btn {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        background: rgba(30, 41, 59, 0.8);
+        border: 1px solid rgba(59, 130, 246, 0.5);
+        color: #3b82f6;
+        padding: 2px 8px;
+        font-size: 10px;
+        text-transform: uppercase;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    pre:hover .copy-code-btn {
+        opacity: 1;
+    }
+</style>
+{% endblock %}

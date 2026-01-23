@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="min-h-[90vh] flex flex-col md:flex-row items-center justify-center px-6 md:px-20 gap-16 relative">
+    
+    <div class="flex-1 space-y-8 z-10">
+        <div class="inline-block px-3 py-1 border border-blue-500/30 bg-blue-500/10 text-blue-400 font-mono text-xs tracking-widest uppercase rounded-full">
+            Designer Graphique & Développeur Python Web
+        </div>
+        <h1 class="text-6xl md:text-8xl font-black leading-[0.9] tracking-tighter">
+            LINX <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">CONCEPT.</span>
+        </h1>
+        <p class="text-slate-400 max-w-lg text-lg font-light leading-relaxed">
+            Fusionner l'esthétique du <span class="text-white font-medium italic">Graphic Design</span> avec la puissance du <span class="text-white font-medium font-mono">Python Web Dev</span>.
+        </p>
+        
+        <div class="flex flex-wrap gap-4">
+            <a href="{% url 'contact' %}" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-sm font-bold transition flex items-center gap-3 group">
+                ME RECRUTER <span class="group-hover:translate-x-1 transition">→</span>
+            </a>
+            <a href="https://wa.me/237650218023" class="border border-slate-700 hover:border-emerald-500 px-8 py-4 rounded-sm font-bold transition flex items-center gap-3">
+                DISCUTONS <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="relative flex-1 group w-100 h-100">
+        <div class="absolute inset-0 bg-blue-500/20 blur-[120px] rounded-full group-hover:bg-emerald-500/20 transition-all duration-1000"></div>
+        <div class="ghibli-float relative border-[12px] border-slate-900 shadow-2xl overflow-hidden bg-slate-800">
+            <img src="{% static 'img/avatar.png' %}" alt="Maxwell" 
+            class="w-full h-full grayscale group-hover:grayscale-0 transition duration-700 scale-110 group-hover:scale-100">
+        </div>
+        <div class="ghibli-float absolute -bottom-4 -right-4 bg-blue-500 text-white p-2 text-xs font-mono">
+            LVL. 2026
+        </div>
+    </div>
+</section>
+
+<section class="p-10">
+    <h3 class="text-2xl font-bold mb-8 flex items-center gap-4">
+        <span class="h-[1px] w-12 bg-blue-500"></span> Projets récents
+    </h3>
+
+    <div class="px-10 py-10 flex gap-6 text-xs font-mono uppercase tracking-widest border-t border-slate-900">
+        <button onclick="filterProjects('all')" class="filter-btn text-blue-500" data-filter="all">Tout_</button>
+        <button onclick="filterProjects('WEB')" class="filter-btn text-slate-400" data-filter="WEB">Web_Dev</button>
+        <button onclick="filterProjects('GRAPHIC')" class="filter-btn text-slate-400" data-filter="GRAPHIC">Graphic_Design</button>
+    </div>
+
+    <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-5 lg:px-20">
+        {% for project in projects %}
+        <div class="project-item" data-category="{{ project.category }}">
+            <div class="group relative overflow-hidden bg-slate-900 border border-slate-800 p-4 hover:border-blue-500 transition">
+                <img src="{{ project.image.url }}" class="project-card-img">
+                <h4 class="text-xl pt-2 font-bold">{{ project.title }}</h4>
+                <p class="text-slate-500 text-sm mb-4">{{ project.get_category_display }}</p>
+                <a href="{% url 'project_detail' project.slug %}" class="text-blue-400 text-xs uppercase tracking-widest group-hover:underline">Explorer →</a>
+            </div>
+        </div>  
+        {% endfor %}
+    </div>
+
+    <script>
+    function filterProjects(category) {
+        const items = document.querySelectorAll('.project-item');
+        
+        gsap.to(items, {
+            scale: 0.8,
+            opacity: 0,
+            duration: 0.2,
+            onComplete: () => {
+                items.forEach(item => {
+                    if (category === 'all' || item.getAttribute('data-category') === category) {
+                        item.style.display = 'block';
+                        gsap.to(item, { scale: 1, opacity: 1, duration: 0.4 });
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+        });
+    }
+    </script>
+</section>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="max-w-4xl mx-auto px-6 py-20">
+    <h1 class="text-4xl font-black mb-12 italic uppercase tracking-tighter">
+        <span class="text-blue-500">#</span> Découvertes
+    </h1>
+
+    <div class="space-y-16">
+        {% for post in posts %}
+        <article class="group relative">
+            <div class="flex flex-col md:flex-row gap-8 items-start">
+                <span class="font-mono text-slate-500 text-sm py-2">{{ post.created_at|date:"d M Y" }}</span>
+                <div class="flex-1">
+                    <h2 class="text-2xl font-bold group-hover:text-blue-400 transition">
+                        <a href="{% url 'blog_detail' post.slug %}">{{ post.title }}</a>
+                    </h2>
+                    <p class="text-slate-400 mt-4 leading-relaxed line-clamp-2">
+                        {{ post.content|striptags|truncatewords:30 }}
+                    </p>
+                    <a href="{% url 'blog_detail' post.slug %}" class="inline-block mt-4 text-xs font-mono border-b border-blue-500 pb-1">LIRE_LA_SUITE_</a>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
