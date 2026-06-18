@@ -2,29 +2,31 @@
 
 {% block title %}{{ project.title|upper }} // PROJECT_DETAILS{% endblock %}
 
-{% block main_class %}px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto{% endblock %}
+{% block body_class %}overflow-x-hidden{% endblock %}
+
+{% block main_class %}px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto overflow-x-hidden{% endblock %}
 
 {% block content %}
-<nav class="mb-12">
-    <a class="group inline-flex items-center gap-2 font-code-sm text-code-sm text-outline hover:text-tertiary transition-colors" href="{% url 'home' %}">
+<nav class="mb-6 sm:mb-12">
+    <a class="group inline-flex items-center gap-2 font-code-sm text-xs sm:text-sm text-outline hover:text-tertiary transition-colors" href="{% url 'home' %}">
         <span class="material-symbols-outlined text-[16px]">arrow_back</span>
-        <span>RETOUR_INDEX</span>
+        <span>← RETOUR_INDEX</span>
     </a>
 </nav>
 
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-    <div class="lg:col-span-12 mb-12">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
-            <div>
-                <span class="inline-block px-3 py-1 mb-4 border border-tertiary text-tertiary font-label-caps text-label-caps">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-gutter min-w-0">
+    <div class="lg:col-span-12 mb-8 sm:mb-12 min-w-0">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-8">
+            <div class="min-w-0">
+                <span class="inline-block px-2 sm:px-3 py-1 mb-3 sm:mb-4 border border-tertiary text-tertiary font-label-caps text-[10px] sm:text-label-caps">
                     {% if project.category == 'WEB' %}#PYTHON{% else %}#DESIGN{% endif %}
                 </span>
-                <h1 class="font-display-xl text-[64px] md:text-display-xl leading-none font-black tracking-tighter uppercase mb-2">
+                <h1 class="text-[2rem] leading-tight sm:text-[3rem] md:text-display-xl font-black tracking-tighter uppercase mb-2 break-words">
                     {{ project.title|upper }}
                 </h1>
             </div>
-            <div class="flex flex-col items-start md:items-end gap-4">
-                <div class="font-code-sm text-code-sm text-outline border-l-2 md:border-l-0 md:border-r-2 border-primary pl-4 md:pl-0 md:pr-4 py-1">
+            <div class="flex flex-col items-start md:items-end gap-4 shrink-0">
+                <div class="font-code-sm text-[10px] sm:text-sm text-outline border-l-2 md:border-l-0 md:border-r-2 border-primary pl-3 sm:pl-4 md:pl-0 md:pr-4 py-1">
                     [STATUS: DEPLOYED]<br>
                     [CATEGORY: {{ project.get_category_display|upper }}]<br>
                     [TIMESTAMP: {{ project.created_at|date:"Y.m.d" }}]
@@ -33,18 +35,18 @@
         </div>
     </div>
 
-    <div class="lg:col-span-12 mb-16">
+    <div class="lg:col-span-12 mb-10 sm:mb-16 min-w-0">
         <div class="relative bg-surface-container-high glow-border overflow-hidden">
-            <div class="h-10 bg-surface-container-highest flex items-center px-4 justify-between border-b border-outline-variant/30">
-                <div class="flex gap-2">
+            <div class="min-h-10 bg-surface-container-highest flex items-center px-3 sm:px-4 justify-between gap-2 border-b border-outline-variant/30">
+                <div class="flex gap-1.5 sm:gap-2 shrink-0">
                     <div class="w-2.5 h-2.5 rounded-full bg-outline/40"></div>
                     <div class="w-2.5 h-2.5 rounded-full bg-outline/40"></div>
                     <div class="w-2.5 h-2.5 rounded-full bg-outline/40"></div>
                 </div>
-                <div class="font-code-sm text-[10px] uppercase tracking-widest text-outline">~/linx/projects/{{ project.slug }}_final.tiff</div>
-                <div class="w-12"></div>
+                <div class="flex-1 min-w-0 font-code-sm text-[9px] sm:text-[10px] uppercase tracking-widest text-outline text-center truncate px-1">~/linx/projects/{{ project.slug }}_final.tiff</div>
+                <div class="w-6 sm:w-12 shrink-0"></div>
             </div>
-            <div class="aspect-[21/9] w-full relative">
+            <div class="aspect-video sm:aspect-[21/9] w-full relative">
                 <img alt="{{ project.title }}" class="w-full h-full object-cover mix-blend-screen opacity-90" src="{{ project.image.url }}">
                 <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
                 <div class="absolute top-4 right-4 font-code-sm text-tertiary/50 text-[10px] leading-tight text-right hidden md:block">
@@ -56,19 +58,19 @@
         </div>
     </div>
 
-    <div class="lg:col-span-7">
-        <div class="space-y-8">
+    <div class="lg:col-span-7 min-w-0">
+        <div class="space-y-6 sm:space-y-8">
             <section>
-                <h2 class="font-label-caps text-label-caps text-primary mb-4 flex items-center gap-2">
-                    <span class="w-8 h-[1px] bg-primary"></span> [01_OVERVIEW]
+                <h2 class="font-label-caps text-[10px] sm:text-label-caps text-primary mb-3 sm:mb-4 flex items-center gap-2">
+                    <span class="w-6 sm:w-8 h-[1px] bg-primary shrink-0"></span> [01_OVERVIEW]
                 </h2>
-                <div class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                <div class="font-body-md sm:font-body-lg text-sm sm:text-body-lg text-on-surface-variant leading-relaxed">
                     {{ project.description|linebreaks }}
                 </div>
             </section>
-            <section class="p-6 bg-surface-container-low border-l-2 border-tertiary">
-                <h3 class="font-code-sm text-code-sm text-tertiary mb-2 uppercase">Command line interface integrated</h3>
-                <p class="font-code-sm text-code-sm italic text-outline">
+            <section class="p-4 sm:p-6 bg-surface-container-low border-l-2 border-tertiary">
+                <h3 class="font-code-sm text-[10px] sm:text-sm text-tertiary mb-2 uppercase">Command line interface integrated</h3>
+                <p class="font-code-sm text-[10px] sm:text-sm italic text-outline">
                     "The code is not just a tool; it is the aesthetic itself."<br>
                     — LINX_CONCEPT
                 </p>
@@ -76,49 +78,49 @@
         </div>
     </div>
 
-    <aside class="lg:col-span-5 flex flex-col gap-8">
-        <div class="bg-surface-container border border-outline-variant/30 p-8">
-            <h2 class="font-label-caps text-label-caps text-primary mb-6 flex items-center justify-between">
+    <aside class="lg:col-span-5 flex flex-col gap-6 sm:gap-8 min-w-0">
+        <div class="bg-surface-container border border-outline-variant/30 p-5 sm:p-8">
+            <h2 class="font-label-caps text-[10px] sm:text-label-caps text-primary mb-4 sm:mb-6 flex items-center justify-between gap-2">
                 <span>SYSTEM_STACK</span>
-                <span class="material-symbols-outlined text-[16px]">memory</span>
+                <span class="material-symbols-outlined text-[16px] shrink-0">memory</span>
             </h2>
-            <ul class="space-y-4 font-code-sm text-code-sm">
-                <li class="flex justify-between border-b border-outline-variant/10 pb-2">
-                    <span class="text-outline">CATEGORY:</span>
-                    <span class="text-on-surface">{{ project.get_category_display|upper }}</span>
+            <ul class="space-y-3 sm:space-y-4 font-code-sm text-[10px] sm:text-sm">
+                <li class="flex flex-col sm:flex-row sm:justify-between gap-1 border-b border-outline-variant/10 pb-2">
+                    <span class="text-outline shrink-0">CATEGORY:</span>
+                    <span class="text-on-surface break-words sm:text-right">{{ project.get_category_display|upper }}</span>
                 </li>
-                <li class="flex justify-between border-b border-outline-variant/10 pb-2">
-                    <span class="text-outline">FRAMEWORK:</span>
-                    <span class="text-on-surface">{% if project.category == 'WEB' %}DJANGO // PYTHON{% else %}ADOBE CC{% endif %}</span>
+                <li class="flex flex-col sm:flex-row sm:justify-between gap-1 border-b border-outline-variant/10 pb-2">
+                    <span class="text-outline shrink-0">FRAMEWORK:</span>
+                    <span class="text-on-surface break-words sm:text-right">{% if project.category == 'WEB' %}DJANGO // PYTHON{% else %}ADOBE CC{% endif %}</span>
                 </li>
-                <li class="flex justify-between border-b border-outline-variant/10 pb-2">
-                    <span class="text-outline">DEPLOYED:</span>
-                    <span class="text-on-surface">{{ project.created_at|date:"Y.m.d" }}</span>
+                <li class="flex flex-col sm:flex-row sm:justify-between gap-1 border-b border-outline-variant/10 pb-2">
+                    <span class="text-outline shrink-0">DEPLOYED:</span>
+                    <span class="text-on-surface sm:text-right">{{ project.created_at|date:"Y.m.d" }}</span>
                 </li>
             </ul>
         </div>
 
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-3 sm:gap-4">
             {% if project.live_url %}
-            <a href="{{ project.live_url }}" target="_blank" rel="noopener" class="group relative flex items-center justify-center gap-3 w-full py-5 border-2 border-primary bg-transparent font-label-caps text-label-caps text-primary hover:bg-primary hover:text-background transition-all duration-300 overflow-hidden flicker-animation">
+            <a href="{{ project.live_url }}" target="_blank" rel="noopener" class="group relative flex items-center justify-center gap-2 sm:gap-3 w-full py-4 sm:py-5 border-2 border-primary bg-transparent font-label-caps text-[10px] sm:text-label-caps text-primary hover:bg-primary hover:text-background transition-all duration-300 overflow-hidden flicker-animation text-center px-2">
                 <span class="relative z-10">&gt; VOIR LE SITE</span>
-                <span class="material-symbols-outlined relative z-10">visibility</span>
+                <span class="material-symbols-outlined relative z-10 text-lg">visibility</span>
             </a>
             {% endif %}
             {% if project.github_url %}
-            <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="group relative flex items-center justify-center gap-3 w-full py-5 border-2 border-outline-variant bg-transparent font-label-caps text-label-caps text-on-surface-variant hover:border-tertiary hover:text-tertiary transition-all duration-300 flicker-animation">
+            <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="group relative flex items-center justify-center gap-2 sm:gap-3 w-full py-4 sm:py-5 border-2 border-outline-variant bg-transparent font-label-caps text-[10px] sm:text-label-caps text-on-surface-variant hover:border-tertiary hover:text-tertiary transition-all duration-300 flicker-animation text-center px-2">
                 <span class="relative z-10">&gt; GITHUB_REPOSITORY</span>
-                <span class="material-symbols-outlined relative z-10">code</span>
+                <span class="material-symbols-outlined relative z-10 text-lg">code</span>
             </a>
             {% endif %}
         </div>
 
-        <div class="p-4 border border-outline-variant/10 bg-surface-container-lowest/50">
+        <div class="p-3 sm:p-4 border border-outline-variant/10 bg-surface-container-lowest/50">
             <div class="flex items-center gap-2 mb-2">
-                <div class="w-2 h-2 rounded-full bg-tertiary"></div>
+                <div class="w-2 h-2 rounded-full bg-tertiary shrink-0"></div>
                 <span class="font-code-sm text-[10px] text-tertiary uppercase tracking-widest">Live System Feed</span>
             </div>
-            <div class="font-code-sm text-[10px] text-outline leading-tight">
+            <div class="font-code-sm text-[10px] text-outline leading-tight break-all sm:break-normal">
                 fetching assets from /mnt/storage/0x2...<br>
                 checking integrity... [OK]<br>
                 rendering component_v2... <span class="cursor-blink"></span>

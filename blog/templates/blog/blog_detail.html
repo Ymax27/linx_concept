@@ -2,19 +2,21 @@
 
 {% block title %}{{ post.title|upper }} // LINX_BLOG{% endblock %}
 
-{% block main_class %}max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop{% endblock %}
+{% block body_class %}overflow-x-hidden{% endblock %}
+
+{% block main_class %}max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop overflow-x-hidden{% endblock %}
 
 {% block content %}
-<div class="max-w-3xl mx-auto md:px-12">
-    <nav class="mb-8 font-code-sm text-xs opacity-50 uppercase tracking-widest">
+<div class="max-w-3xl mx-auto md:px-12 min-w-0">
+    <nav class="mb-6 sm:mb-8 font-code-sm text-[10px] sm:text-xs opacity-50 uppercase tracking-widest break-all sm:break-normal">
         <a href="{% url 'blog_index' %}" class="hover:text-primary transition-colors">blog</a>
         <span class="text-outline"> / </span>
         <span class="text-primary">{{ post.title|truncatechars:30 }}</span>
     </nav>
 
-    <header class="mb-12 md:mb-16">
-        <span class="font-code-sm text-tertiary text-sm tracking-tighter">{{ post.created_at|date:"d.m.Y" }}</span>
-        <h1 class="font-display-xl text-[48px] md:text-[64px] leading-none text-on-surface uppercase mt-4 mb-6 tracking-tighter">
+    <header class="mb-8 sm:mb-12 md:mb-16 min-w-0">
+        <span class="font-code-sm text-tertiary text-xs sm:text-sm tracking-tighter">{{ post.created_at|date:"d.m.Y" }}</span>
+        <h1 class="text-[1.75rem] leading-tight sm:text-[2.5rem] md:text-[64px] font-black text-on-surface uppercase mt-3 sm:mt-4 mb-4 sm:mb-6 tracking-tighter break-words">
             {{ post.title }}
         </h1>
         <div class="h-px w-full bg-gradient-to-r from-primary/50 to-transparent flex items-center">
@@ -23,33 +25,33 @@
     </header>
 
     {% if post.thumbnail %}
-    <div class="relative group mb-16 overflow-hidden border border-outline-variant/30 aspect-video hover:border-primary transition-colors duration-500">
+    <div class="relative group mb-10 sm:mb-16 overflow-hidden border border-outline-variant/30 aspect-video hover:border-primary transition-colors duration-500 min-w-0">
         <img alt="{{ post.title }}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="{{ post.thumbnail.url }}">
         <div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
     </div>
     {% endif %}
 
-    <div class="prose prose-invert max-w-none font-body-md leading-relaxed text-on-surface-variant text-base md:text-lg">
+    <div class="prose prose-invert prose-sm sm:prose-base max-w-none font-body-md leading-relaxed text-on-surface-variant min-w-0">
         {{ post.content|safe }}
     </div>
 
-    <div class="mt-20 p-6 md:p-10 border border-outline-variant/30 bg-surface-container-low flex flex-col md:flex-row justify-between items-center gap-8">
-        <div class="flex-1">
-            <h4 class="font-headline-md text-headline-md text-on-surface mb-2">Une question technique ?</h4>
-            <p class="text-sm text-on-surface-variant font-code-sm">Si tu as besoin d'un coup de main sur un projet Python ou d'un design hybride, contacte-moi directement.</p>
+    <div class="mt-12 sm:mt-20 p-5 sm:p-6 md:p-10 border border-outline-variant/30 bg-surface-container-low flex flex-col md:flex-row justify-between items-stretch md:items-center gap-6 sm:gap-8">
+        <div class="flex-1 min-w-0">
+            <h4 class="text-lg sm:text-headline-md font-headline-md text-on-surface mb-2">Une question technique ?</h4>
+            <p class="text-xs sm:text-sm text-on-surface-variant font-code-sm">Si tu as besoin d'un coup de main sur un projet Python ou d'un design hybride, contacte-moi directement.</p>
         </div>
-        <div class="flex flex-col gap-4 w-full md:w-auto">
-            <a href="https://wa.me/237650218023" target="_blank" rel="noopener" class="text-center btn-terminal border-2 border-tertiary text-tertiary font-code-sm text-xs px-6 py-3 uppercase tracking-widest">
+        <div class="flex flex-col gap-3 sm:gap-4 w-full md:w-auto shrink-0">
+            <a href="https://wa.me/237650218023" target="_blank" rel="noopener" class="text-center btn-terminal border-2 border-tertiary text-tertiary font-code-sm text-xs px-6 py-3 uppercase tracking-widest w-full md:w-auto">
                 &gt; WHATSAPP
             </a>
-            <a href="{% url 'contact' %}" class="text-center border-2 border-primary text-primary font-code-sm text-xs px-6 py-3 uppercase tracking-widest hover:bg-primary hover:text-background transition-all">
+            <a href="{% url 'contact' %}" class="text-center border-2 border-primary text-primary font-code-sm text-xs px-6 py-3 uppercase tracking-widest hover:bg-primary hover:text-background transition-all w-full md:w-auto">
                 &gt; CONTACT
             </a>
         </div>
     </div>
 
-    <div class="mt-12">
-        <a class="group inline-flex items-center gap-2 font-code-sm text-code-sm text-outline hover:text-tertiary transition-colors flicker-animation" href="{% url 'blog_index' %}">
+    <div class="mt-8 sm:mt-12">
+        <a class="group inline-flex items-center gap-2 font-code-sm text-xs sm:text-sm text-outline hover:text-tertiary transition-colors flicker-animation" href="{% url 'blog_index' %}">
             <span class="material-symbols-outlined text-[16px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
             <span>← RETOUR_ARCHIVE</span>
         </a>

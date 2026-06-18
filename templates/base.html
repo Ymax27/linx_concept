@@ -177,6 +177,9 @@
         }
         code { font-family: 'JetBrains Mono', monospace; }
         .prose-invert a { color: #98cbff; }
+        .prose pre { overflow-x: auto; max-width: 100%; }
+        .prose img, .prose video { max-width: 100%; height: auto; }
+        .prose { overflow-wrap: anywhere; }
         @keyframes marquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -227,9 +230,9 @@
     <div class="fixed top-0 left-0 w-full z-50" id="site-header">
         <nav class="bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 h-20 shadow-[0_0_15px_rgba(55,118,171,0.1)]">
             <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-full max-w-container-max mx-auto">
-                <a href="{% url 'home' %}" class="font-headline-md text-headline-md font-black tracking-tighter text-on-surface flex items-center gap-3">
-                    <img src="{% static 'img/logo.jpg' %}" alt="LINX Concept" class="w-10 h-10 rounded-full object-cover border border-primary/50">
-                    LINX.
+                <a href="{% url 'home' %}" class="font-headline-md text-xl sm:text-headline-md font-black tracking-tighter text-on-surface flex items-center gap-2 sm:gap-3 min-w-0">
+                    <img src="{% static 'img/logo.jpg' %}" alt="LINX Concept" class="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-full object-cover border border-primary/50">
+                    <span class="truncate">LINX.</span>
                 </a>
                 <div class="hidden md:flex items-center gap-8">
                     {% with url_name=request.resolver_match.url_name %}
@@ -245,12 +248,12 @@
             </div>
         </nav>
         <div class="md:hidden bg-surface/90 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_4px_12px_rgba(55,118,171,0.08)]">
-            <div class="nav-mobile-scroll flex justify-center items-center gap-1 px-margin-mobile py-2.5 overflow-x-auto max-w-container-max mx-auto">
+            <div class="nav-mobile-scroll flex justify-start items-center gap-1 px-margin-mobile py-2.5 overflow-x-auto max-w-container-max mx-auto">
                 {% with url_name=request.resolver_match.url_name %}
-                <a class="font-label-caps text-[10px] font-bold whitespace-nowrap px-3 py-1 border {% if url_name == 'home' %}border-primary/40 bg-primary/10 text-primary{% else %}border-transparent text-on-surface-variant hover:text-primary{% endif %} transition-all" href="{% url 'home' %}">_ROOT</a>
-                <a class="font-label-caps text-[10px] font-bold whitespace-nowrap px-3 py-1 border {% if url_name == 'project_detail' %}border-primary/40 bg-primary/10 text-primary{% else %}border-transparent text-on-surface-variant hover:text-primary{% endif %} transition-all" href="{% url 'home' %}#projects">_PROJECTS</a>
-                <a class="font-label-caps text-[10px] font-bold whitespace-nowrap px-3 py-1 border border-transparent text-on-surface-variant hover:text-primary transition-all" href="{% url 'home' %}#stack">_STACK</a>
-                <a class="font-label-caps text-[10px] font-bold whitespace-nowrap px-3 py-1 border {% if url_name == 'blog_index' or url_name == 'blog_detail' %}border-primary/40 bg-primary/10 text-primary{% else %}border-transparent text-on-surface-variant hover:text-primary{% endif %} transition-all" href="{% url 'blog_index' %}">_BLOG</a>
+                <a class="font-label-caps text-[10px] font-bold whitespace-nowrap shrink-0 px-3 py-1 border {% if url_name == 'home' %}border-primary/40 bg-primary/10 text-primary{% else %}border-transparent text-on-surface-variant hover:text-primary{% endif %} transition-all" href="{% url 'home' %}">_ROOT</a>
+                <a class="font-label-caps text-[10px] font-bold whitespace-nowrap shrink-0 px-3 py-1 border {% if url_name == 'project_detail' %}border-primary/40 bg-primary/10 text-primary{% else %}border-transparent text-on-surface-variant hover:text-primary{% endif %} transition-all" href="{% url 'home' %}#projects">_PROJECTS</a>
+                <a class="font-label-caps text-[10px] font-bold whitespace-nowrap shrink-0 px-3 py-1 border border-transparent text-on-surface-variant hover:text-primary transition-all" href="{% url 'home' %}#stack">_STACK</a>
+                <a class="font-label-caps text-[10px] font-bold whitespace-nowrap shrink-0 px-3 py-1 border {% if url_name == 'blog_index' or url_name == 'blog_detail' %}border-primary/40 bg-primary/10 text-primary{% else %}border-transparent text-on-surface-variant hover:text-primary{% endif %} transition-all" href="{% url 'blog_index' %}">_BLOG</a>
                 {% endwith %}
             </div>
         </div>
@@ -261,12 +264,12 @@
     </main>
 
     {% block footer %}
-    <footer class="relative w-full bottom-0 bg-surface-container-lowest border-t border-outline-variant/50">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter px-margin-mobile md:px-margin-desktop py-12 max-w-container-max mx-auto">
-            <div class="flex flex-col gap-4">
-                <div class="flex items-center gap-3">
-                    <img src="{% static 'img/logo.jpg' %}" alt="LINX Concept" class="w-10 h-10 rounded-full object-cover border border-primary/50">
-                    <div class="font-headline-md text-headline-md text-on-surface font-black tracking-tighter">LINX_CONCEPT</div>
+    <footer class="relative w-full bottom-0 bg-surface-container-lowest border-t border-outline-variant/50 overflow-x-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-gutter px-margin-mobile md:px-margin-desktop py-8 sm:py-12 max-w-container-max mx-auto">
+            <div class="flex flex-col gap-4 min-w-0">
+                <div class="flex items-center gap-3 min-w-0">
+                    <img src="{% static 'img/logo.jpg' %}" alt="LINX Concept" class="w-10 h-10 shrink-0 rounded-full object-cover border border-primary/50">
+                    <div class="text-2xl sm:text-headline-md font-headline-md text-on-surface font-black tracking-tighter truncate">LINX_CONCEPT</div>
                 </div>
                 <div class="font-code-sm text-outline max-w-xs text-sm">
                     Exploration de la synergie entre logique programmée et expression graphique.
@@ -274,7 +277,7 @@
             </div>
             <div class="flex flex-col gap-4">
                 <div class="font-label-caps text-label-caps text-tertiary">SOCIAL_MATRIX</div>
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-2 gap-2 sm:gap-3">
                     <a class="font-code-sm text-outline hover:text-tertiary hover:underline decoration-tertiary underline-offset-4 flicker-animation flex items-center gap-2" href="https://github.com/Ymax27" target="_blank" rel="noopener"><i class="fa-brands fa-github w-4"></i> GITHUB</a>
                     <a class="font-code-sm text-outline hover:text-tertiary hover:underline decoration-tertiary underline-offset-4 flicker-animation flex items-center gap-2" href="https://www.linkedin.com/in/young-max-37a2a9334" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin w-4"></i> LINKEDIN</a>
                     <a class="font-code-sm text-outline hover:text-tertiary hover:underline decoration-tertiary underline-offset-4 flicker-animation flex items-center gap-2" href="https://youtube.com/@linxgraphix" target="_blank" rel="noopener"><i class="fa-brands fa-youtube w-4"></i> YOUTUBE</a>
@@ -282,9 +285,9 @@
                     <a class="font-code-sm text-outline hover:text-tertiary hover:underline decoration-tertiary underline-offset-4 flicker-animation flex items-center gap-2 col-span-2" href="mailto:lindsellmaxwell@gmail.com"><i class="fa-solid fa-envelope w-4"></i> EMAIL</a>
                 </div>
             </div>
-            <div class="flex flex-col gap-4 md:items-end">
+            <div class="flex flex-col gap-4 md:items-end min-w-0">
                 <div class="font-label-caps text-label-caps text-primary">SYSTEM_STATUS</div>
-                <div class="flex items-center gap-2 text-tertiary font-code-sm">
+                <div class="flex items-center gap-2 text-tertiary font-code-sm text-xs sm:text-sm">
                     <span class="w-2 h-2 bg-tertiary rounded-full animate-pulse"></span>
                     ONLINE: READY_TO_WORK
                 </div>

@@ -4,13 +4,13 @@
 
 {% block body_class %}overflow-x-hidden{% endblock %}
 
-{% block main_class %}max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop{% endblock %}
+{% block main_class %}max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop overflow-x-hidden{% endblock %}
 
 {% block content %}
-<div class="max-w-4xl mx-auto md:px-12">
-    <div class="mb-16 relative">
-        <div class="absolute -top-8 left-0 text-tertiary font-code-sm text-xs opacity-50 tracking-widest">[SECTION_04 // DISCOVERIES]</div>
-        <h2 class="font-display-xl text-[64px] md:text-display-xl leading-none text-on-surface uppercase mb-4">
+<div class="max-w-4xl mx-auto md:px-12 min-w-0">
+    <div class="mb-10 sm:mb-16 relative pt-6 sm:pt-0">
+        <div class="text-tertiary font-code-sm text-[10px] sm:text-xs opacity-50 tracking-widest mb-3 sm:absolute sm:-top-8 sm:left-0 sm:mb-0">[SECTION_04 // DISCOVERIES]</div>
+        <h2 class="text-[2.5rem] sm:text-[64px] md:text-display-xl leading-none font-black text-on-surface uppercase mb-4 break-words">
             # BLOG
         </h2>
         <div class="h-px w-full bg-gradient-to-r from-primary/50 to-transparent flex items-center">
@@ -18,57 +18,57 @@
         </div>
     </div>
 
-    <section class="space-y-0 border-l border-outline-variant/30 ml-2 md:ml-0">
+    <section class="space-y-0 border-l border-outline-variant/30 ml-2 md:ml-0 min-w-0">
         {% for post in posts %}
-        <article class="group relative py-12 md:pl-12 border-b border-outline-variant/30 hover:bg-surface-container-low transition-colors duration-500 blog-article">
-            <div class="absolute top-12 -left-[5px] w-[9px] h-[9px] {% if forloop.first %}bg-primary{% else %}bg-outline-variant group-hover:bg-primary{% endif %} border border-background transition-colors"></div>
-            <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2">
-                <span class="font-code-sm text-tertiary text-sm tracking-tighter">{{ post.created_at|date:"d.m.Y" }}</span>
-                <span class="font-label-caps text-outline text-[10px] tracking-widest border border-outline-variant/50 px-2 py-0.5">TAG: BLOG</span>
+        <article class="group relative py-8 sm:py-12 pl-3 sm:pl-0 md:pl-12 pr-1 border-b border-outline-variant/30 hover:bg-surface-container-low transition-colors duration-500 blog-article min-w-0">
+            <div class="absolute top-8 sm:top-12 -left-[5px] w-[9px] h-[9px] {% if forloop.first %}bg-primary{% else %}bg-outline-variant group-hover:bg-primary{% endif %} border border-background transition-colors"></div>
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-3 sm:mb-4 gap-2">
+                <span class="font-code-sm text-tertiary text-xs sm:text-sm tracking-tighter">{{ post.created_at|date:"d.m.Y" }}</span>
+                <span class="font-label-caps text-outline text-[10px] tracking-widest border border-outline-variant/50 px-2 py-0.5 w-fit">TAG: BLOG</span>
             </div>
 
             {% if post.thumbnail %}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                <div>
-                    <h3 class="font-headline-md text-headline-md mb-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-start min-w-0">
+                <div class="min-w-0 order-2 lg:order-1">
+                    <h3 class="text-xl sm:text-headline-md font-headline-md mb-3 sm:mb-4 break-words">
                         <a class="blog-title-link text-on-surface group-hover:text-primary transition-colors duration-200 cursor-terminal" href="{% url 'blog_detail' post.slug %}">{{ post.title|upper }}</a>
                     </h3>
-                    <p class="text-on-surface-variant font-body-md leading-relaxed mb-6">
+                    <p class="text-on-surface-variant font-body-md text-sm sm:text-base leading-relaxed mb-4 sm:mb-6">
                         {{ post.content|striptags|truncatewords:40 }}
                     </p>
-                    <div class="flex items-center gap-4">
-                        <a class="font-code-sm text-primary hover:underline underline-offset-8 decoration-2 flicker-animation" href="{% url 'blog_detail' post.slug %}">
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <a class="font-code-sm text-xs sm:text-sm text-primary hover:underline underline-offset-8 decoration-2 flicker-animation" href="{% url 'blog_detail' post.slug %}">
                             LIRE_LA_SUITE_
                         </a>
                         <span class="material-symbols-outlined text-primary text-sm animate-pulse">chevron_right</span>
                     </div>
                 </div>
-                <div class="relative overflow-hidden border border-outline-variant/30 aspect-video group-hover:border-primary transition-colors duration-500">
+                <div class="relative overflow-hidden border border-outline-variant/30 aspect-video group-hover:border-primary transition-colors duration-500 order-1 lg:order-2 min-w-0">
                     <img alt="{{ post.title }}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" src="{{ post.thumbnail.url }}">
                     <div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
             </div>
             {% else %}
-            <h3 class="font-headline-md text-headline-md mb-4">
+            <h3 class="text-xl sm:text-headline-md font-headline-md mb-3 sm:mb-4 break-words">
                 <a class="blog-title-link text-on-surface group-hover:text-primary transition-colors duration-200 cursor-terminal" href="{% url 'blog_detail' post.slug %}">{{ post.title|upper }}</a>
             </h3>
-            <p class="text-on-surface-variant font-body-md leading-relaxed mb-6 max-w-2xl">
+            <p class="text-on-surface-variant font-body-md text-sm sm:text-base leading-relaxed mb-4 sm:mb-6 max-w-2xl">
                 {{ post.content|striptags|truncatewords:40 }}
             </p>
-            <div class="flex items-center gap-4">
-                <a class="font-code-sm text-primary hover:underline underline-offset-8 decoration-2 flicker-animation" href="{% url 'blog_detail' post.slug %}">
+            <div class="flex items-center gap-3 sm:gap-4">
+                <a class="font-code-sm text-xs sm:text-sm text-primary hover:underline underline-offset-8 decoration-2 flicker-animation" href="{% url 'blog_detail' post.slug %}">
                     LIRE_LA_SUITE_
                 </a>
                 <span class="material-symbols-outlined text-primary text-sm animate-pulse">chevron_right</span>
             </div>
             {% endif %}
 
-            <div class="absolute right-0 bottom-4 opacity-0 group-hover:opacity-10 transition-opacity hidden md:block">
+            <div class="absolute right-0 bottom-4 opacity-0 group-hover:opacity-10 transition-opacity hidden md:block pointer-events-none">
                 <span class="font-code-sm text-[80px] font-black">0x{% if forloop.counter < 10 %}0{% endif %}{{ forloop.counter }}</span>
             </div>
         </article>
         {% empty %}
-        <div class="py-12 md:pl-12">
+        <div class="py-8 sm:py-12 pl-3 sm:pl-0 md:pl-12">
             <div class="font-code-sm text-outline">// NO_ARTICLES_FOUND</div>
             <p class="text-on-surface-variant font-body-md mt-4">Aucun article publié pour le moment.</p>
         </div>
