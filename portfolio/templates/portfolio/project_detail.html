@@ -1,52 +1,129 @@
 {% extends 'base.html' %}
 
+{% block title %}{{ project.title|upper }} // PROJECT_DETAILS{% endblock %}
+
+{% block main_class %}px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto{% endblock %}
+
 {% block content %}
-<article class="max-w-6xl mx-auto px-6 py-20">
-    <a href="{% url 'home' %}" class="text-blue-500 font-mono text-sm hover:underline">← RETOUR_INDEX</a>
+<nav class="mb-12">
+    <a class="group inline-flex items-center gap-2 font-code-sm text-code-sm text-outline hover:text-tertiary transition-colors" href="{% url 'home' %}">
+        <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+        <span>RETOUR_INDEX</span>
+    </a>
+</nav>
 
-    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-16">
-        
-        <div class="relative group">
-            <div class="absolute -inset-2 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-64 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-500">
-        </div>
-
-        <div class="space-y-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+    <div class="lg:col-span-12 mb-12">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
             <div>
-                <span class="text-xs font-mono text-slate-500 uppercase tracking-widest">{{ project.get_category_display }}</span>
-                <h1 class="text-5xl font-black mt-2 uppercase italic">{{ project.title }}</h1>
+                <span class="inline-block px-3 py-1 mb-4 border border-tertiary text-tertiary font-label-caps text-label-caps">
+                    {% if project.category == 'WEB' %}#PYTHON{% else %}#DESIGN{% endif %}
+                </span>
+                <h1 class="font-display-xl text-[64px] md:text-display-xl leading-none font-black tracking-tighter uppercase mb-2">
+                    {{ project.title|upper }}
+                </h1>
             </div>
-
-            <div class="prose prose-invert text-slate-400 leading-relaxed">
-                {{ project.description|linebreaks }}
-            </div>
-
-            <div class="pt-8 flex flex-wrap gap-4">
-                {% if project.category == 'WEB' %}
-                    {% if project.live_url %}
-                    <a href="{{ project.live_url }}" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold transition flex items-center gap-2">
-                        VOIR LE SITE <span>🌐</span>
-                    </a>
-                    {% endif %}
-                    
-                    {% if project.github_url %}
-                    <a href="{{ project.github_url }}" target="_blank" class="border border-slate-700 hover:border-blue-500 px-8 py-3 rounded-full font-bold transition flex items-center gap-2">
-                        GITHUB <span></></span>
-                    </a>
-                    {% endif %}
-                {% else %}
-                    <button class="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-full font-bold transition">
-                        VOIR EN HD
-                    </button>
-                {% endif %}
+            <div class="flex flex-col items-start md:items-end gap-4">
+                <div class="font-code-sm text-code-sm text-outline border-l-2 md:border-l-0 md:border-r-2 border-primary pl-4 md:pl-0 md:pr-4 py-1">
+                    [STATUS: DEPLOYED]<br>
+                    [CATEGORY: {{ project.get_category_display|upper }}]<br>
+                    [TIMESTAMP: {{ project.created_at|date:"Y.m.d" }}]
+                </div>
             </div>
         </div>
     </div>
-</article>
 
-<script>
-    // Animation d'entrée spécifique pour le détail
-    gsap.from("img", { duration: 1.2, scale: 0.9, opacity: 0, ease: "expo.out" });
-    gsap.from("h1", { duration: 1, x: -30, opacity: 0, delay: 0.3 });
-</script>
+    <div class="lg:col-span-12 mb-16">
+        <div class="relative bg-surface-container-high glow-border overflow-hidden">
+            <div class="h-10 bg-surface-container-highest flex items-center px-4 justify-between border-b border-outline-variant/30">
+                <div class="flex gap-2">
+                    <div class="w-2.5 h-2.5 rounded-full bg-outline/40"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-outline/40"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-outline/40"></div>
+                </div>
+                <div class="font-code-sm text-[10px] uppercase tracking-widest text-outline">~/linx/projects/{{ project.slug }}_final.tiff</div>
+                <div class="w-12"></div>
+            </div>
+            <div class="aspect-[21/9] w-full relative">
+                <img alt="{{ project.title }}" class="w-full h-full object-cover mix-blend-screen opacity-90" src="{{ project.image.url }}">
+                <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+                <div class="absolute top-4 right-4 font-code-sm text-tertiary/50 text-[10px] leading-tight text-right hidden md:block">
+                    0x54 0x65 0x63 0x68<br>
+                    0x4C 0x6F 0x67 0x69<br>
+                    0x63 0x5F 0x45 0x78
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="lg:col-span-7">
+        <div class="space-y-8">
+            <section>
+                <h2 class="font-label-caps text-label-caps text-primary mb-4 flex items-center gap-2">
+                    <span class="w-8 h-[1px] bg-primary"></span> [01_OVERVIEW]
+                </h2>
+                <div class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                    {{ project.description|linebreaks }}
+                </div>
+            </section>
+            <section class="p-6 bg-surface-container-low border-l-2 border-tertiary">
+                <h3 class="font-code-sm text-code-sm text-tertiary mb-2 uppercase">Command line interface integrated</h3>
+                <p class="font-code-sm text-code-sm italic text-outline">
+                    "The code is not just a tool; it is the aesthetic itself."<br>
+                    — LINX_CONCEPT
+                </p>
+            </section>
+        </div>
+    </div>
+
+    <aside class="lg:col-span-5 flex flex-col gap-8">
+        <div class="bg-surface-container border border-outline-variant/30 p-8">
+            <h2 class="font-label-caps text-label-caps text-primary mb-6 flex items-center justify-between">
+                <span>SYSTEM_STACK</span>
+                <span class="material-symbols-outlined text-[16px]">memory</span>
+            </h2>
+            <ul class="space-y-4 font-code-sm text-code-sm">
+                <li class="flex justify-between border-b border-outline-variant/10 pb-2">
+                    <span class="text-outline">CATEGORY:</span>
+                    <span class="text-on-surface">{{ project.get_category_display|upper }}</span>
+                </li>
+                <li class="flex justify-between border-b border-outline-variant/10 pb-2">
+                    <span class="text-outline">FRAMEWORK:</span>
+                    <span class="text-on-surface">{% if project.category == 'WEB' %}DJANGO // PYTHON{% else %}ADOBE CC{% endif %}</span>
+                </li>
+                <li class="flex justify-between border-b border-outline-variant/10 pb-2">
+                    <span class="text-outline">DEPLOYED:</span>
+                    <span class="text-on-surface">{{ project.created_at|date:"Y.m.d" }}</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="flex flex-col gap-4">
+            {% if project.live_url %}
+            <a href="{{ project.live_url }}" target="_blank" rel="noopener" class="group relative flex items-center justify-center gap-3 w-full py-5 border-2 border-primary bg-transparent font-label-caps text-label-caps text-primary hover:bg-primary hover:text-background transition-all duration-300 overflow-hidden flicker-animation">
+                <span class="relative z-10">&gt; VOIR LE SITE</span>
+                <span class="material-symbols-outlined relative z-10">visibility</span>
+            </a>
+            {% endif %}
+            {% if project.github_url %}
+            <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="group relative flex items-center justify-center gap-3 w-full py-5 border-2 border-outline-variant bg-transparent font-label-caps text-label-caps text-on-surface-variant hover:border-tertiary hover:text-tertiary transition-all duration-300 flicker-animation">
+                <span class="relative z-10">&gt; GITHUB_REPOSITORY</span>
+                <span class="material-symbols-outlined relative z-10">code</span>
+            </a>
+            {% endif %}
+        </div>
+
+        <div class="p-4 border border-outline-variant/10 bg-surface-container-lowest/50">
+            <div class="flex items-center gap-2 mb-2">
+                <div class="w-2 h-2 rounded-full bg-tertiary"></div>
+                <span class="font-code-sm text-[10px] text-tertiary uppercase tracking-widest">Live System Feed</span>
+            </div>
+            <div class="font-code-sm text-[10px] text-outline leading-tight">
+                fetching assets from /mnt/storage/0x2...<br>
+                checking integrity... [OK]<br>
+                rendering component_v2... <span class="cursor-blink"></span>
+            </div>
+        </div>
+    </aside>
+</div>
 {% endblock %}

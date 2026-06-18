@@ -1,76 +1,58 @@
 {% extends 'base.html' %}
-{% block content %}
-<article class="max-w-3xl mx-auto px-4 md:px-6 py-12 md:py-24">
-    <div class="mb-8 font-mono text-xs opacity-50 uppercase tracking-widest">
-        <a href="{% url 'blog_index' %}" class="hover:text-blue-400">blog</a> / {{ post.title|truncatechars:20 }}
-    </div>
 
-    <header class="mb-12 md:mb-16 text-center">
-        <span class="text-blue-500 font-mono text-sm uppercase tracking-widest">{{ post.created_at|date:"d F Y" }}</span>
-        <h1 class="text-3xl md:text-6xl font-black mt-4 mb-6 leading-tight tracking-tighter uppercase italic">
+{% block title %}{{ post.title|upper }} // LINX_BLOG{% endblock %}
+
+{% block main_class %}max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto md:px-12">
+    <nav class="mb-8 font-code-sm text-xs opacity-50 uppercase tracking-widest">
+        <a href="{% url 'blog_index' %}" class="hover:text-primary transition-colors">blog</a>
+        <span class="text-outline"> / </span>
+        <span class="text-primary">{{ post.title|truncatechars:30 }}</span>
+    </nav>
+
+    <header class="mb-12 md:mb-16">
+        <span class="font-code-sm text-tertiary text-sm tracking-tighter">{{ post.created_at|date:"d.m.Y" }}</span>
+        <h1 class="font-display-xl text-[48px] md:text-[64px] leading-none text-on-surface uppercase mt-4 mb-6 tracking-tighter">
             {{ post.title }}
         </h1>
-        <div class="h-1 w-20 bg-gradient-to-r from-blue-500 to-emerald-500 mx-auto"></div>
+        <div class="h-px w-full bg-gradient-to-r from-primary/50 to-transparent flex items-center">
+            <div class="px-2 bg-background font-code-sm text-[10px] text-outline">READ_ONLY</div>
+        </div>
     </header>
 
-    {% if post.image %} <div class="relative group mb-16 overflow-hidden rounded-sm border border-slate-800">
-        <img src="{{ post.image.url }}" class="w-full h-[300px] md:h-[500px] object-cover grayscale group-hover:grayscale-0 transition duration-1000 scale-105 group-hover:scale-100">
+    {% if post.thumbnail %}
+    <div class="relative group mb-16 overflow-hidden border border-outline-variant/30 aspect-video hover:border-primary transition-colors duration-500">
+        <img alt="{{ post.title }}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="{{ post.thumbnail.url }}">
+        <div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
     </div>
     {% endif %}
 
-    <div class="prose prose-invert prose-blue max-w-none font-light leading-relaxed text-slate-300 text-base md:text-lg line-numbers">
+    <div class="prose prose-invert max-w-none font-body-md leading-relaxed text-on-surface-variant text-base md:text-lg">
         {{ post.content|safe }}
     </div>
 
-    <div class="mt-20 p-6 md:p-10 border border-slate-800 bg-slate-900/30 rounded-sm flex flex-col md:flex-row justify-between items-center gap-8">
+    <div class="mt-20 p-6 md:p-10 border border-outline-variant/30 bg-surface-container-low flex flex-col md:flex-row justify-between items-center gap-8">
         <div class="flex-1">
-            <h4 class="font-bold text-xl mb-2 italic">Une question technique ?</h4>
-            <p class="text-sm text-slate-400">Si tu as besoin d'un coup de main sur un projet Python ou d'un design hybride, contacte-moi directement.</p>
+            <h4 class="font-headline-md text-headline-md text-on-surface mb-2">Une question technique ?</h4>
+            <p class="text-sm text-on-surface-variant font-code-sm">Si tu as besoin d'un coup de main sur un projet Python ou d'un design hybride, contacte-moi directement.</p>
         </div>
         <div class="flex flex-col gap-4 w-full md:w-auto">
-            <a href="https://wa.me/237650218023" class="text-center bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs px-6 py-3 uppercase tracking-widest transition">
-                WhatsApp Me
+            <a href="https://wa.me/237650218023" target="_blank" rel="noopener" class="text-center btn-terminal border-2 border-tertiary text-tertiary font-code-sm text-xs px-6 py-3 uppercase tracking-widest">
+                &gt; WHATSAPP
             </a>
-            <a href="mailto:lindsellmaxwell@gmail.com" class="text-center border border-slate-700 hover:border-blue-500 text-slate-300 font-mono text-xs px-6 py-3 uppercase tracking-widest transition">
-                Email
+            <a href="{% url 'contact' %}" class="text-center border-2 border-primary text-primary font-code-sm text-xs px-6 py-3 uppercase tracking-widest hover:bg-primary hover:text-background transition-all">
+                &gt; CONTACT
             </a>
         </div>
     </div>
-</article>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // On s'assure que chaque bloc <pre> est stylé pour Prism
-        document.querySelectorAll('pre').forEach((block) => {
-            block.classList.add('line-numbers');
-            // On ajoute un bouton de copie rapide
-            const button = document.createElement('button');
-            button.innerText = 'Copier';
-            button.className = 'copy-code-btn';
-            block.style.position = 'relative';
-            block.appendChild(button);
-        });
-    });
-</script>
-
-<style>
-    /* Style pour le bouton copier qui apparaît dans les blocs de code */
-    .copy-code-btn {
-        position: absolute;
-        top: 0.5rem;
-        right: 0.5rem;
-        background: rgba(30, 41, 59, 0.8);
-        border: 1px solid rgba(59, 130, 246, 0.5);
-        color: #3b82f6;
-        padding: 2px 8px;
-        font-size: 10px;
-        text-transform: uppercase;
-        cursor: pointer;
-        opacity: 0;
-        transition: opacity 0.3s;
-    }
-    pre:hover .copy-code-btn {
-        opacity: 1;
-    }
-</style>
+    <div class="mt-12">
+        <a class="group inline-flex items-center gap-2 font-code-sm text-code-sm text-outline hover:text-tertiary transition-colors flicker-animation" href="{% url 'blog_index' %}">
+            <span class="material-symbols-outlined text-[16px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+            <span>← RETOUR_ARCHIVE</span>
+        </a>
+    </div>
+</div>
 {% endblock %}

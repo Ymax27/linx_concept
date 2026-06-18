@@ -1,161 +1,300 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html class="dark scroll-smooth" lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linx Concept | Portfolio</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <title>{% block title %}LINX_CONCEPT // MAXWELL ATSOBENG{% endblock %}</title>
+    <link rel="icon" type="image/jpeg" href="{% static 'img/logo.jpg' %}">
+    <link rel="apple-touch-icon" href="{% static 'img/logo.jpg' %}">
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container": "#201f20",
+                        "primary-container": "#3776ab",
+                        "on-tertiary-container": "#e4ffdb",
+                        "tertiary": "#00e639",
+                        "surface-container-low": "#1c1b1c",
+                        "surface-container-highest": "#353436",
+                        "on-surface": "#e5e2e3",
+                        "surface-container-high": "#2a2a2b",
+                        "surface-variant": "#353436",
+                        "outline-variant": "#41474f",
+                        "on-background": "#e5e2e3",
+                        "background": "#131314",
+                        "outline": "#8b919a",
+                        "primary": "#98cbff",
+                        "on-secondary-container": "#006c71",
+                        "surface-container-lowest": "#0e0e0f",
+                        "on-surface-variant": "#c1c7d0",
+                        "surface-tint": "#98cbff",
+                        "on-primary-container": "#f5f8ff",
+                        "secondary-container": "#00f4fe",
+                        "on-primary": "#003354",
+                        "surface": "#131314",
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        gutter: "24px",
+                        "margin-desktop": "64px",
+                        unit: "4px",
+                        "container-max": "1440px",
+                        "margin-mobile": "16px"
+                    },
+                    fontFamily: {
+                        "body-md": ["JetBrains Mono"],
+                        "code-sm": ["JetBrains Mono"],
+                        "display-xl": ["Anybody"],
+                        "headline-md": ["Anybody"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Anybody"],
+                        "headline-lg": ["Anybody"],
+                        "body-lg": ["JetBrains Mono"]
+                    },
+                    fontSize: {
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "code-sm": ["14px", { lineHeight: "20px", fontWeight: "500" }],
+                        "display-xl": ["120px", { lineHeight: "110px", letterSpacing: "-0.04em", fontWeight: "900" }],
+                        "headline-md": ["32px", { lineHeight: "40px", fontWeight: "700" }],
+                        "label-caps": ["12px", { lineHeight: "16px", fontWeight: "700" }],
+                        "headline-lg-mobile": ["40px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "800" }],
+                        "headline-lg": ["64px", { lineHeight: "72px", letterSpacing: "-0.02em", fontWeight: "800" }],
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
 
     <style>
-        .cursor-dot {
-            width: 8px; height: 8px; background-color: #3b82f6;
-            position: fixed; border-radius: 50%; pointer-events: none;
-            z-index: 9999; transition: transform 0.1s ease;
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        @keyframes flicker {
+            0% { opacity: 0.97; }
+            5% { opacity: 0.95; }
+            10% { opacity: 0.9; }
+            15% { opacity: 0.98; }
+            100% { opacity: 1; }
         }
         @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(2deg); }
-            50% { transform: translateY(-15px) rotate(-1deg); }
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
-        .ghibli-float { animation: float 6s ease-in-out infinite; }
-        
-        .project-card-img {
-            width: 100%; height: 350px; object-fit: cover; object-position: top;
+        .cursor-terminal {
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewport='0 0 12 12'><rect width='12' height='12' fill='%2300FF41'/></svg>"), auto;
         }
-
-        /* Style Code propre */
+        .flicker-animation:hover { animation: flicker 0.15s infinite; }
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.05;
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBDdL9rITpAbN7oSsnBzuhbAB7eE1_mkr4JT7wjRHUX7_TS62mcxbcJC9Dmvaa46SpXY1HfOYsb1Fo0sOGi3rVTbM4PWn6HDhlq6uyGZv7w0RMh-LRjuUHBhouVMDp9DQLfvv9Ck3oZSpw0xottWnnoARQ4zr5m8xmeLpz8YkUwCosLRZuvVGKWv3V_YAbIVv2xMlAR9y9x0SBmTfA1-dSFT1_G02yysjMK_a6TazN9yW1AOU9BpWbFA0owWkqk1pMGDhkfpdM-f6o);
+        }
+        .floating { animation: float 6s ease-in-out infinite; }
+        #scroll-progress {
+            transform-origin: left;
+            transition: transform 0.1s ease-out;
+        }
+        .terminal-window {
+            border: 1px solid rgba(229, 231, 235, 0.1);
+            background: #1A1A1C;
+            position: relative;
+            overflow: hidden;
+        }
+        .terminal-header {
+            background: #1A1A1C;
+            border-bottom: 1px solid rgba(229, 231, 235, 0.1);
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+        }
+        .btn-terminal {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .btn-terminal:hover {
+            background-color: #3776ab;
+            color: #0A0A0B;
+            box-shadow: 0 0 15px rgba(55, 118, 171, 0.5);
+        }
+        .custom-cursor {
+            width: 10px;
+            height: 10px;
+            background: #00e639;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: difference;
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .custom-cursor { display: block; }
+        }
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+            background-color: #00FF41;
+            width: 8px;
+            height: 18px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .glow-border {
+            box-shadow: 0 0 15px rgba(55, 118, 171, 0.2);
+            border: 1px solid rgba(55, 118, 171, 0.4);
+        }
+        .terminal-shadow {
+            box-shadow: 0 0 15px rgba(55, 118, 171, 0.15);
+        }
+        .hover-flicker:hover { animation: flicker 0.15s infinite; }
         pre {
-            background: #0f172a !important;
+            background: #1c1b1c !important;
             padding: 1.5rem !important;
-            border-radius: 0.5rem;
+            border-radius: 0;
             overflow-x: auto;
-            border: 1px solid #1e293b;
+            border: 1px solid rgba(229, 231, 235, 0.1);
             margin: 2rem 0;
         }
-        code { font-family: 'Fira Code', monospace; }
-
-        /* Loader Animation */
-        @keyframes progress {
-            0% { width: 0%; }
-            100% { width: 100%; }
+        code { font-family: 'JetBrains Mono', monospace; }
+        .prose-invert a { color: #98cbff; }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
-        .loader-bar-inner { animation: progress 1.5s ease-in-out infinite; }
+        .marquee-container {
+            mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+        }
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marquee 50s linear infinite;
+        }
+        .marquee-track:hover { animation-play-state: paused; }
+        .nav-mobile-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .nav-mobile-scroll::-webkit-scrollbar { display: none; }
+        {% block extra_css %}{% endblock %}
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans selection:bg-blue-500/30 overflow-x-hidden">
+<body class="bg-background text-on-surface font-body-md selection:bg-secondary-container selection:text-on-secondary-container cursor-terminal {% block body_class %}{% endblock %}">
 
-    <div class="cursor-dot hidden md:block" id="cursor"></div>
+    <canvas id="shader-canvas" class="fixed inset-0 w-full h-full -z-20 opacity-30 pointer-events-none"></canvas>
+    <div class="noise-overlay"></div>
 
-    <div id="loader" class="fixed inset-0 bg-blue-600 z-[10000] flex flex-col items-center justify-center px-6">
-        <h2 class="text-xl md:text-4xl font-mono font-bold italic text-white tracking-tighter uppercase">
-            LINX_CONCEPT.LOAD()
-        </h2>
-        <div class="w-48 h-1 bg-white/20 mt-4 overflow-hidden">
-            <div class="h-full bg-white loader-bar-inner"></div>
+    <div class="fixed top-0 left-0 w-full h-1 bg-primary z-[60]" id="scroll-progress" style="transform: scaleX(0);"></div>
+    <div class="custom-cursor" id="cursor"></div>
+
+    {% block loader %}
+    <div class="fixed inset-0 z-[100] bg-background flex flex-col items-center justify-center transition-all duration-700" id="loader">
+        <div class="max-w-md w-full px-margin-mobile">
+            <div class="font-code-sm text-primary mb-2">LINX_CONCEPT.LOAD()</div>
+            <div class="h-1 w-full bg-surface-container border border-outline-variant/30 overflow-hidden">
+                <div class="h-full bg-primary w-0 transition-all duration-300" id="progress-bar"></div>
+            </div>
+            <div class="font-code-sm text-outline mt-2 text-right" id="status-text">00%</div>
+        </div>
+    </div>
+    {% endblock %}
+
+    <div class="fixed top-0 left-0 w-full z-50" id="site-header">
+        <nav class="bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 h-20 shadow-[0_0_15px_rgba(55,118,171,0.1)]">
+            <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-full max-w-container-max mx-auto">
+                <a href="{% url 'home' %}" class="font-headline-md text-headline-md font-black tracking-tighter text-on-surface flex items-center gap-3">
+                    <img src="{% static 'img/logo.jpg' %}" alt="LINX Concept" class="w-10 h-10 rounded-full object-cover border border-primary/50">
+                    LINX.
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    {% with url_name=request.resolver_match.url_name %}
+                    <a class="font-label-caps text-label-caps {% if url_name == 'home' %}text-primary font-bold{% else %}text-on-surface-variant hover:text-primary{% endif %} transition-all underline-offset-8 hover:underline" href="{% url 'home' %}">_ROOT</a>
+                    <a class="font-label-caps text-label-caps {% if url_name == 'project_detail' %}text-primary font-bold{% else %}text-on-surface-variant hover:text-primary{% endif %} transition-all underline-offset-8 hover:underline" href="{% url 'home' %}#projects">_PROJECTS</a>
+                    <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all underline-offset-8 hover:underline" href="{% url 'home' %}#stack">_STACK</a>
+                    <a class="font-label-caps text-label-caps {% if url_name == 'blog_index' or url_name == 'blog_detail' %}text-primary font-bold{% else %}text-on-surface-variant hover:text-primary{% endif %} transition-all underline-offset-8 hover:underline" href="{% url 'blog_index' %}">_BLOG</a>
+                    {% endwith %}
+                </div>
+                <a href="{% url 'contact' %}" class="font-label-caps text-label-caps px-3 py-1.5 md:px-4 md:py-2 text-[10px] md:text-label-caps border border-primary {% if request.resolver_match.url_name == 'contact' %}bg-primary/20 text-primary{% else %}text-primary hover:bg-primary/10{% endif %} transition-all shrink-0">
+                    &gt; CONTACT
+                </a>
+            </div>
+        </nav>
+        <div class="md:hidden bg-surface/90 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_4px_12px_rgba(55,118,171,0.08)]">
+            <div class="nav-mobile-scroll flex justify-center items-center gap-1 px-margin-mobile py-2.5 overflow-x-auto max-w-container-max mx-auto">
+                {% with url_name=request.resolver_match.url_name %}
+                <a class="font-label-caps text-[10px] font-bold whitespace-nowrap px-3 py-1 border {% if url_name == 'home' %}border-primary/40 bg-primary/10 text-primary{% else %}border-transparent text-on-surface-variant hover:text-primary{% endif %} transition-all" href="{% url 'home' %}">_ROOT</a>
+                <a class="font-label-caps text-[10px] font-bold whitespace-nowrap px-3 py-1 border {% if url_name == 'project_detail' %}border-primary/40 bg-primary/10 text-primary{% else %}border-transparent text-on-surface-variant hover:text-primary{% endif %} transition-all" href="{% url 'home' %}#projects">_PROJECTS</a>
+                <a class="font-label-caps text-[10px] font-bold whitespace-nowrap px-3 py-1 border border-transparent text-on-surface-variant hover:text-primary transition-all" href="{% url 'home' %}#stack">_STACK</a>
+                <a class="font-label-caps text-[10px] font-bold whitespace-nowrap px-3 py-1 border {% if url_name == 'blog_index' or url_name == 'blog_detail' %}border-primary/40 bg-primary/10 text-primary{% else %}border-transparent text-on-surface-variant hover:text-primary{% endif %} transition-all" href="{% url 'blog_index' %}">_BLOG</a>
+                {% endwith %}
+            </div>
         </div>
     </div>
 
-    <canvas id="canvas-code" class="fixed top-0 left-0 w-full h-full -z-10 opacity-10 pointer-events-none"></canvas>
-
-    <nav class="p-4 md:p-6 border-b border-slate-800 bg-slate-950/90 backdrop-blur-md sticky top-0 z-[1000]">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='{% url 'home' %}'">
-                <img src="{% static 'img/logo.jpg' %}" alt="Logo" class="w-10 h-10 rounded-full object-cover border border-blue-500/50">
-                <div class="text-xl font-bold tracking-tighter uppercase">LINX<span class="text-blue-400">.</span></div>
-            </div>
-
-            <div class="flex flex-row space-x-6 md:space-x-8 text-[10px] md:text-sm uppercase tracking-[0.2em] items-center font-bold">
-                <a href="{% url 'home' %}" class="hover:text-blue-400 transition">Portfolio</a>
-                <a href="{% url 'blog_index' %}" class="hover:text-blue-400 transition">Blog</a>
-                <a href="{% url 'contact' %}" class="text-blue-400 border border-blue-500/50 px-3 py-1 md:px-5 md:py-2 hover:bg-blue-500 hover:text-white transition rounded-sm">Contact</a>
-            </div>
-        </div>
-        <div id="progress-bar" class="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-blue-500 to-emerald-500 w-0 transition-all"></div>
-    </nav>
-
-    <main class="min-h-screen">
+    <main class="pt-[8.75rem] md:pt-32 pb-24 min-h-screen {% block main_class %}{% endblock %}">
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="mt-32 border-t border-slate-900 bg-black/50 py-16 px-6">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
-            <div class="flex flex-col items-center md:items-start space-y-4">
-                <img src="{% static 'img/logo.jpg' %}" class="w-12 h-12 rounded-full border border-slate-700" alt="Linx Logo">
-                <p class="text-slate-500 text-sm max-w-xs text-center md:text-left">Hybride Graphic Design & Python Web Dev.</p>
+    {% block footer %}
+    <footer class="relative w-full bottom-0 bg-surface-container-lowest border-t border-outline-variant/50">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter px-margin-mobile md:px-margin-desktop py-12 max-w-container-max mx-auto">
+            <div class="flex flex-col gap-4">
+                <div class="flex items-center gap-3">
+                    <img src="{% static 'img/logo.jpg' %}" alt="LINX Concept" class="w-10 h-10 rounded-full object-cover border border-primary/50">
+                    <div class="font-headline-md text-headline-md text-on-surface font-black tracking-tighter">LINX_CONCEPT</div>
+                </div>
+                <div class="font-code-sm text-outline max-w-xs text-sm">
+                    Exploration de la synergie entre logique programmée et expression graphique.
+                </div>
             </div>
-
-            <div class="flex gap-8 text-2xl text-slate-500 justify-center">
-                <a href="https://github.com/Ymax27" target="_blank" class="hover:text-white transition"><i class="fa-brands fa-github"></i></a>
-                <a href="https://youtube.com/@linxgraphix" target="_blank" class="hover:text-red-500 transition"><i class="fa-brands fa-youtube"></i></a>
-                <a href="https://www.linkedin.com/in/young-max-37a2a9334" target="_blank" class="hover:text-blue-500 transition"><i class="fa-brands fa-linkedin"></i></a>   
+            <div class="flex flex-col gap-4">
+                <div class="font-label-caps text-label-caps text-tertiary">SOCIAL_MATRIX</div>
+                <div class="grid grid-cols-2 gap-3">
+                    <a class="font-code-sm text-outline hover:text-tertiary hover:underline decoration-tertiary underline-offset-4 flicker-animation flex items-center gap-2" href="https://github.com/Ymax27" target="_blank" rel="noopener"><i class="fa-brands fa-github w-4"></i> GITHUB</a>
+                    <a class="font-code-sm text-outline hover:text-tertiary hover:underline decoration-tertiary underline-offset-4 flicker-animation flex items-center gap-2" href="https://www.linkedin.com/in/young-max-37a2a9334" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin w-4"></i> LINKEDIN</a>
+                    <a class="font-code-sm text-outline hover:text-tertiary hover:underline decoration-tertiary underline-offset-4 flicker-animation flex items-center gap-2" href="https://youtube.com/@linxgraphix" target="_blank" rel="noopener"><i class="fa-brands fa-youtube w-4"></i> YOUTUBE</a>
+                    <a class="font-code-sm text-outline hover:text-tertiary hover:underline decoration-tertiary underline-offset-4 flicker-animation flex items-center gap-2" href="https://wa.me/237650218023" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp w-4"></i> WHATSAPP</a>
+                    <a class="font-code-sm text-outline hover:text-tertiary hover:underline decoration-tertiary underline-offset-4 flicker-animation flex items-center gap-2 col-span-2" href="mailto:lindsellmaxwell@gmail.com"><i class="fa-solid fa-envelope w-4"></i> EMAIL</a>
+                </div>
             </div>
-
-            <div class="flex flex-col items-center md:items-end space-y-4 font-mono text-sm">
-                <a href="mailto:lindsellmaxwell@gmail.com" class="text-blue-400 underline">lindsellmaxwell@gmail.com</a>
-                <a href="https://wa.me/237650218023" class="bg-white text-black px-6 py-2 text-xs font-bold uppercase hover:bg-emerald-500 hover:text-white transition">WhatsApp</a>
+            <div class="flex flex-col gap-4 md:items-end">
+                <div class="font-label-caps text-label-caps text-primary">SYSTEM_STATUS</div>
+                <div class="flex items-center gap-2 text-tertiary font-code-sm">
+                    <span class="w-2 h-2 bg-tertiary rounded-full animate-pulse"></span>
+                    ONLINE: READY_TO_WORK
+                </div>
+                <div class="font-code-sm text-outline text-[10px] mt-auto">
+                    [SYSTEM_READY] // 2026 LINX_CONCEPT
+                </div>
             </div>
-        </div>
-        <div class="text-center mt-16 text-[10px] font-mono text-slate-700 uppercase tracking-[0.3em]">
-            © 2026 LINX_CONCEPT // MAXWELL
         </div>
     </footer>
+    {% endblock %}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-
-    <script>
-        // Loader exit
-        window.addEventListener('load', () => {
-            gsap.to("#loader", { y: "-100%", duration: 1, ease: "expo.inOut", delay: 0.5 });
-        });
-
-        // Scroll progress
-        window.onscroll = () => {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            document.getElementById("progress-bar").style.width = (winScroll / height) * 100 + "%";
-        };
-
-        // Custom Cursor
-        const cursor = document.getElementById('cursor');
-        document.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
-        });
-
-        // Matrix Background
-        const canvasCode = document.getElementById('canvas-code');
-        const ctxCode = canvasCode.getContext('2d');
-        canvasCode.width = window.innerWidth; canvasCode.height = window.innerHeight;
-        const codeStrs = ["def", "import", "class", "print", "01", "=>", "python", "linx"];
-        const columns = canvasCode.width / 20;
-        const drops = Array(Math.floor(columns)).fill(1);
-        function drawCode() {
-            ctxCode.fillStyle = 'rgba(2, 6, 23, 0.1)'; ctxCode.fillRect(0, 0, canvasCode.width, canvasCode.height);
-            ctxCode.fillStyle = '#1e293b'; ctxCode.font = '14px monospace';
-            drops.forEach((y, i) => {
-                const txt = codeStrs[Math.floor(Math.random() * codeStrs.length)];
-                ctxCode.fillText(txt, i * 25, y * 15);
-                if (y * 15 > canvasCode.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            });
-        }
-        setInterval(drawCode, 50);
-
-        // Animations Globales
-        gsap.from(".ghibli-float", { duration: 1.5, x: 50, opacity: 0, ease: "power4.out", delay: 1 });
-        
-        // Force Prism
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('pre code').forEach((el) => {
-                if (!el.className.includes('language-')) el.classList.add('language-python');
-                Prism.highlightElement(el);
-            });
-        });
-    </script>
+    <script src="{% static 'js/linx-shader.js' %}"></script>
+    <script src="{% static 'js/linx-core.js' %}"></script>
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

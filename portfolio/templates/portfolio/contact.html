@@ -1,51 +1,134 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
-<section class="max-w-2xl mx-auto px-6 py-20">
-    <div class="bg-slate-900 border border-slate-800 rounded-lg overflow-hidden shadow-2xl">
+{% block title %}LINX // CONTACT_ME.PY{% endblock %}
 
-        <div class="bg-slate-800 px-4 py-2 flex gap-2">
-            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <div class="w-3 h-3 rounded-full bg-green-500"></div>
-            <span class="ml-4 font-mono text-xs text-slate-400">contact_me.py</span>
+{% block body_class %}overflow-x-hidden{% endblock %}
+
+{% block main_class %}w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-6 md:py-12 flex flex-col items-center relative overflow-x-hidden{% endblock %}
+
+{% block content %}
+<div class="pointer-events-none absolute top-20 left-0 w-48 h-48 md:top-1/4 md:left-1/4 md:w-96 md:h-96 bg-primary/5 blur-[80px] md:blur-[120px] rounded-full -z-10" id="light-primary"></div>
+<div class="pointer-events-none absolute bottom-10 right-0 w-40 h-40 md:bottom-1/4 md:right-1/4 md:w-64 md:h-64 bg-tertiary/5 blur-[60px] md:blur-[100px] rounded-full -z-10" id="light-tertiary"></div>
+
+<div class="w-full max-w-3xl bg-surface-container-low rounded-lg overflow-hidden border border-outline-variant/30 terminal-shadow">
+    <div class="bg-surface-container-high min-h-10 px-3 md:px-4 py-2 flex items-center justify-between gap-2">
+        <div class="flex gap-1.5 md:gap-2 shrink-0">
+            <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#ff5f56]"></div>
+            <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#ffbd2e]"></div>
+            <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#27c93f]"></div>
+        </div>
+        <div class="font-code-sm text-[10px] md:text-code-sm text-outline flex items-center gap-1.5 min-w-0">
+            <span class="material-symbols-outlined text-[12px] md:text-[14px] shrink-0">folder_open</span>
+            <span class="truncate">~/linx/portfolio/contact_me.py</span>
+        </div>
+        <div class="w-6 md:w-12 shrink-0"></div>
+    </div>
+
+    <div class="p-5 sm:p-8 md:p-12">
+        <div class="mb-8 md:mb-10">
+            <div class="text-tertiary font-code-sm text-xs md:text-sm mb-2">[SYSTEM_READY] // INITIALIZING CONTACT HANDLER...</div>
+            <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg leading-none mb-4">DITES-MOI TOUT.</h1>
+            <div class="flex items-center gap-2 text-outline font-code-sm">
+                <span>L'interaction commence ici</span>
+                <span class="cursor-blink"></span>
+            </div>
         </div>
 
-        <form method="POST" class="p-8 space-y-6 font-mono">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="mb-8 p-4 border border-tertiary/50 bg-tertiary/10 font-code-sm text-tertiary">
+                &gt; SUCCESS: {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" class="space-y-10">
             {% csrf_token %}
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="bg-blue-500/20 border border-blue-500 text-blue-400 p-4 mb-6 text-sm">
-                        {{ message }}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+                <div class="group relative">
+                    <label class="block font-label-caps text-label-caps text-outline mb-2 group-focus-within:text-primary transition-colors">NOM_UTILISATEUR</label>
+                    <div class="flex items-center border-b border-outline-variant group-focus-within:border-primary transition-all py-2">
+                        <span class="text-primary font-bold mr-3 font-code-sm">&gt; </span>
+                        <input class="bg-transparent border-none p-0 focus:ring-0 w-full text-on-surface placeholder:text-outline-variant font-body-md" name="name" placeholder="Entrez votre nom" required type="text">
                     </div>
-                {% endfor %}
-            {% endif %}
-
-            <div class="space-y-2">
-                <label class="text-blue-500 text-xs uppercase tracking-widest">> NOM </label>
-                <input type="text" name="name" required class="w-full bg-slate-950 border-b border-slate-700 p-2 focus:border-blue-500 outline-none transition">
+                </div>
+                <div class="group relative">
+                    <label class="block font-label-caps text-label-caps text-outline mb-2 group-focus-within:text-primary transition-colors">EMAIL_ADDR</label>
+                    <div class="flex items-center border-b border-outline-variant group-focus-within:border-primary transition-all py-2">
+                        <span class="text-primary font-bold mr-3 font-code-sm">&gt; </span>
+                        <input class="bg-transparent border-none p-0 focus:ring-0 w-full text-on-surface placeholder:text-outline-variant font-body-md" name="email" placeholder="email@domaine.com" required type="email">
+                    </div>
+                </div>
             </div>
-
-            <div class="space-y-2">
-                <label class="text-blue-500 text-xs uppercase tracking-widest">> EMAIL </label>
-                <input type="email" name="email" required class="w-full bg-slate-950 border-b border-slate-700 p-2 focus:border-blue-500 outline-none transition">
+            <div class="group relative">
+                <label class="block font-label-caps text-label-caps text-outline mb-2 group-focus-within:text-primary transition-colors">SUJET_REQUETE</label>
+                <div class="flex items-center border-b border-outline-variant group-focus-within:border-primary transition-all py-2">
+                    <span class="text-primary font-bold mr-3 font-code-sm">&gt; </span>
+                    <input class="bg-transparent border-none p-0 focus:ring-0 w-full text-on-surface placeholder:text-outline-variant font-body-md" name="subject" placeholder="Objet de votre message" required type="text">
+                </div>
             </div>
-
-            <div class="space-y-2">
-                <label class="text-blue-500 text-xs uppercase tracking-widest">> OBJET</label>
-                <input type="text" name="subject" required class="w-full bg-slate-950 border-b border-slate-700 p-2 focus:border-blue-500 outline-none transition">
+            <div class="group relative">
+                <label class="block font-label-caps text-label-caps text-outline mb-2 group-focus-within:text-primary transition-colors">CORPS_MESSAGE</label>
+                <div class="flex items-start border-b border-outline-variant group-focus-within:border-primary transition-all py-2">
+                    <span class="text-primary font-bold mr-3 font-code-sm mt-1">&gt; </span>
+                    <textarea class="bg-transparent border-none p-0 focus:ring-0 w-full text-on-surface placeholder:text-outline-variant font-body-md resize-none" name="message" placeholder="Tapez votre message ici..." required rows="4"></textarea>
+                </div>
             </div>
-
-            <div class="space-y-2">
-                <label class="text-blue-500 text-xs uppercase tracking-widest">> MESSAGE_CONTENU </label>
-                <textarea name="message" rows="4" required class="w-full bg-slate-950 border-b border-slate-700 p-2 focus:border-blue-500 outline-none transition"></textarea>
+            <div class="pt-4 md:pt-6 flex flex-col items-stretch md:flex-row md:items-center justify-between gap-6 md:gap-8">
+                <button class="w-full md:w-auto px-6 md:px-10 py-4 bg-transparent border-2 border-primary text-primary font-code-sm text-xs md:text-sm font-bold uppercase tracking-wider hover:bg-primary hover:text-background transition-all duration-300 flex items-center justify-center gap-3 group hover-flicker" type="submit">
+                    <span>&gt; EXÉCUTER L'ENVOI</span>
+                    <span class="material-symbols-outlined text-lg transition-transform group-hover:translate-x-1">send</span>
+                </button>
+                <div class="hidden md:flex flex-col text-right">
+                    <span class="font-label-caps text-label-caps text-outline">LOC_LAT: 48.8566</span>
+                    <span class="font-label-caps text-label-caps text-outline">LOC_LONG: 2.3522</span>
+                </div>
             </div>
-
-            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 font-bold uppercase tracking-widest transition transform hover:scale-[1.02]">
-                EXÉCUTER L'ENVOI
-            </button>
         </form>
     </div>
-</section>
+
+    <div class="bg-surface-container-highest/30 px-4 md:px-8 py-3 border-t border-outline-variant/10 flex flex-wrap items-center justify-between gap-2">
+        <div class="flex flex-wrap gap-3 md:gap-6">
+            <span class="text-[10px] text-outline font-code-sm">UTF-8</span>
+            <span class="text-[10px] text-outline font-code-sm">PYTHON 3.11</span>
+            <span class="text-[10px] text-tertiary font-code-sm flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> ONLINE
+            </span>
+        </div>
+        <div class="text-[10px] text-outline font-code-sm">LN 1, COL 1</div>
+    </div>
+</div>
+
+<div class="mt-10 md:mt-16 w-full max-w-3xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-gutter">
+    <div class="p-5 md:p-6 border border-outline-variant/20 bg-surface-container-low/50 backdrop-blur-md rounded">
+        <div class="font-label-caps text-label-caps text-primary mb-3"># GITHUB</div>
+        <div class="font-code-sm text-code-sm text-on-surface break-all">@Ymax27</div>
+    </div>
+    <div class="p-5 md:p-6 border border-outline-variant/20 bg-surface-container-low/50 backdrop-blur-md rounded">
+        <div class="font-label-caps text-label-caps text-primary mb-3"># WHATSAPP</div>
+        <div class="font-code-sm text-code-sm text-on-surface">+237 650 218 023</div>
+    </div>
+    <div class="p-5 md:p-6 border border-outline-variant/20 bg-surface-container-low/50 backdrop-blur-md rounded sm:col-span-2 md:col-span-1">
+        <div class="font-label-caps text-label-caps text-primary mb-3"># EMAIL</div>
+        <div class="font-code-sm text-code-sm text-on-surface break-all">lindsellmaxwell@gmail.com</div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+if (window.matchMedia('(hover: hover)').matches) {
+    document.addEventListener('mousemove', (e) => {
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        const lights = [document.getElementById('light-primary'), document.getElementById('light-tertiary')];
+        lights.forEach((light, index) => {
+            if (!light) return;
+            const speed = (index + 1) * 20;
+            light.style.transform = `translate(${(x - 0.5) * speed}px, ${(y - 0.5) * speed}px)`;
+        });
+    });
+}
+</script>
 {% endblock %}

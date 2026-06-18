@@ -1,28 +1,122 @@
 {% extends 'base.html' %}
 
-{% block content %}
-<section class="max-w-4xl mx-auto px-6 py-20">
-    <h1 class="text-4xl font-black mb-12 italic uppercase tracking-tighter">
-        <span class="text-blue-500">#</span> Découvertes
-    </h1>
+{% block title %}LINX // # DÉCOUVERTES{% endblock %}
 
-    <div class="space-y-16">
+{% block body_class %}overflow-x-hidden{% endblock %}
+
+{% block main_class %}max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto md:px-12">
+    <div class="mb-16 relative">
+        <div class="absolute -top-8 left-0 text-tertiary font-code-sm text-xs opacity-50 tracking-widest">[SECTION_04 // DISCOVERIES]</div>
+        <h2 class="font-display-xl text-[64px] md:text-display-xl leading-none text-on-surface uppercase mb-4">
+            # BLOG
+        </h2>
+        <div class="h-px w-full bg-gradient-to-r from-primary/50 to-transparent flex items-center">
+            <div class="px-2 bg-background font-code-sm text-[10px] text-outline">INDEX_VOL_01</div>
+        </div>
+    </div>
+
+    <section class="space-y-0 border-l border-outline-variant/30 ml-2 md:ml-0">
         {% for post in posts %}
-        <article class="group relative">
-            <div class="flex flex-col md:flex-row gap-8 items-start">
-                <span class="font-mono text-slate-500 text-sm py-2">{{ post.created_at|date:"d M Y" }}</span>
-                <div class="flex-1">
-                    <h2 class="text-2xl font-bold group-hover:text-blue-400 transition">
-                        <a href="{% url 'blog_detail' post.slug %}">{{ post.title }}</a>
-                    </h2>
-                    <p class="text-slate-400 mt-4 leading-relaxed line-clamp-2">
-                        {{ post.content|striptags|truncatewords:30 }}
+        <article class="group relative py-12 md:pl-12 border-b border-outline-variant/30 hover:bg-surface-container-low transition-colors duration-500 blog-article">
+            <div class="absolute top-12 -left-[5px] w-[9px] h-[9px] {% if forloop.first %}bg-primary{% else %}bg-outline-variant group-hover:bg-primary{% endif %} border border-background transition-colors"></div>
+            <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2">
+                <span class="font-code-sm text-tertiary text-sm tracking-tighter">{{ post.created_at|date:"d.m.Y" }}</span>
+                <span class="font-label-caps text-outline text-[10px] tracking-widest border border-outline-variant/50 px-2 py-0.5">TAG: BLOG</span>
+            </div>
+
+            {% if post.thumbnail %}
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div>
+                    <h3 class="font-headline-md text-headline-md mb-4">
+                        <a class="blog-title-link text-on-surface group-hover:text-primary transition-colors duration-200 cursor-terminal" href="{% url 'blog_detail' post.slug %}">{{ post.title|upper }}</a>
+                    </h3>
+                    <p class="text-on-surface-variant font-body-md leading-relaxed mb-6">
+                        {{ post.content|striptags|truncatewords:40 }}
                     </p>
-                    <a href="{% url 'blog_detail' post.slug %}" class="inline-block mt-4 text-xs font-mono border-b border-blue-500 pb-1">LIRE_LA_SUITE_</a>
+                    <div class="flex items-center gap-4">
+                        <a class="font-code-sm text-primary hover:underline underline-offset-8 decoration-2 flicker-animation" href="{% url 'blog_detail' post.slug %}">
+                            LIRE_LA_SUITE_
+                        </a>
+                        <span class="material-symbols-outlined text-primary text-sm animate-pulse">chevron_right</span>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden border border-outline-variant/30 aspect-video group-hover:border-primary transition-colors duration-500">
+                    <img alt="{{ post.title }}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" src="{{ post.thumbnail.url }}">
+                    <div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
             </div>
+            {% else %}
+            <h3 class="font-headline-md text-headline-md mb-4">
+                <a class="blog-title-link text-on-surface group-hover:text-primary transition-colors duration-200 cursor-terminal" href="{% url 'blog_detail' post.slug %}">{{ post.title|upper }}</a>
+            </h3>
+            <p class="text-on-surface-variant font-body-md leading-relaxed mb-6 max-w-2xl">
+                {{ post.content|striptags|truncatewords:40 }}
+            </p>
+            <div class="flex items-center gap-4">
+                <a class="font-code-sm text-primary hover:underline underline-offset-8 decoration-2 flicker-animation" href="{% url 'blog_detail' post.slug %}">
+                    LIRE_LA_SUITE_
+                </a>
+                <span class="material-symbols-outlined text-primary text-sm animate-pulse">chevron_right</span>
+            </div>
+            {% endif %}
+
+            <div class="absolute right-0 bottom-4 opacity-0 group-hover:opacity-10 transition-opacity hidden md:block">
+                <span class="font-code-sm text-[80px] font-black">0x{% if forloop.counter < 10 %}0{% endif %}{{ forloop.counter }}</span>
+            </div>
         </article>
+        {% empty %}
+        <div class="py-12 md:pl-12">
+            <div class="font-code-sm text-outline">// NO_ARTICLES_FOUND</div>
+            <p class="text-on-surface-variant font-body-md mt-4">Aucun article publié pour le moment.</p>
+        </div>
         {% endfor %}
-    </div>
-</section>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.querySelectorAll('.blog-article').forEach(article => {
+    const titleLink = article.querySelector('.blog-title-link');
+    if (!titleLink) return;
+
+    const originalText = titleLink.textContent.trim();
+    let intervalId = null;
+
+    const stopAnimation = (restore = true) => {
+        if (intervalId) {
+            clearInterval(intervalId);
+            intervalId = null;
+        }
+        if (restore) titleLink.textContent = originalText;
+    };
+
+    article.addEventListener('mouseenter', () => {
+        if (!window.matchMedia('(hover: hover)').matches) return;
+        stopAnimation(true);
+
+        let frame = 0;
+        const totalFrames = originalText.length * 2;
+
+        intervalId = setInterval(() => {
+            frame++;
+            const revealed = Math.floor((frame / totalFrames) * originalText.length);
+
+            titleLink.textContent = [...originalText].map((char, index) => {
+                if (char === ' ') return ' ';
+                if (index < revealed) return char;
+                if (/[^A-Za-z0-9]/.test(char)) return char;
+                return String.fromCharCode(65 + Math.floor(Math.random() * 26));
+            }).join('');
+
+            if (frame >= totalFrames) stopAnimation(true);
+        }, 40);
+    });
+
+    article.addEventListener('mouseleave', () => stopAnimation(true));
+});
+</script>
 {% endblock %}
