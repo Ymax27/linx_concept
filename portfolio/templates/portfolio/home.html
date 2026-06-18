@@ -1,43 +1,45 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block main_class %}relative max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop{% endblock %}
+{% block body_class %}overflow-x-hidden{% endblock %}
+
+{% block main_class %}relative max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop overflow-x-hidden{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
-<section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center min-h-[70vh]">
-    <div class="lg:col-span-7 z-10">
-        <div class="inline-block py-1 px-3 mb-6 bg-primary/10 border border-primary/30 font-code-sm text-primary">
-            _PYTHON DEV &amp; DESIGNER GRAPHIC  
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-gutter items-center min-h-0 lg:min-h-[70vh]">
+    <div class="lg:col-span-7 z-10 min-w-0">
+        <div class="inline-block py-1 px-2 sm:px-3 mb-4 sm:mb-6 bg-primary/10 border border-primary/30 font-code-sm text-[10px] sm:text-sm text-primary max-w-full">
+            _PYTHON DEV &amp; DESIGNER GRAPHIC
         </div>
-        <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface uppercase mb-8 leading-tight tracking-tighter">
+        <h1 class="text-[2rem] leading-[1.05] sm:font-headline-lg-mobile md:font-headline-lg sm:text-headline-lg-mobile md:text-headline-lg text-on-surface uppercase mb-6 sm:mb-8 tracking-tighter">
             MAXWELL<br>
             <span class="text-primary">ATSOBENG.</span>
         </h1>
-        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-12 border-l-2 border-primary/50 pl-6">
+        <p class="font-body-md sm:font-body-lg text-base sm:text-body-lg text-on-surface-variant max-w-xl mb-8 sm:mb-12 border-l-2 border-primary/50 pl-4 sm:pl-6">
             L'architecture du code rencontre la précision visuelle. Je conçois des systèmes numériques où la rigueur algorithmique du Python fusionne avec une esthétique brutale et technique.
         </p>
-        <div class="flex flex-wrap gap-4">
-            <a href="{% url 'contact' %}" class="btn-terminal bg-transparent border-2 border-primary text-primary px-8 py-4 font-label-caps text-label-caps flex items-center gap-2">
+        <div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+            <a href="{% url 'contact' %}" class="btn-terminal bg-transparent border-2 border-primary text-primary px-6 sm:px-8 py-3 sm:py-4 font-label-caps text-[10px] sm:text-label-caps flex items-center justify-center gap-2 w-full sm:w-auto">
                 &gt; ME RECRUTER
-                <span class="material-symbols-outlined">arrow_forward</span>
+                <span class="material-symbols-outlined text-lg">arrow_forward</span>
             </a>
-            <a href="https://wa.me/237650218023" target="_blank" rel="noopener" class="btn-terminal border border-outline text-on-surface-variant px-8 py-4 font-label-caps text-label-caps flex items-center gap-2 hover:border-tertiary hover:text-tertiary">
-                <span class="material-symbols-outlined">chat</span>
+            <a href="https://wa.me/237650218023" target="_blank" rel="noopener" class="btn-terminal border border-outline text-on-surface-variant px-6 sm:px-8 py-3 sm:py-4 font-label-caps text-[10px] sm:text-label-caps flex items-center justify-center gap-2 hover:border-tertiary hover:text-tertiary w-full sm:w-auto">
+                <span class="material-symbols-outlined text-lg">chat</span>
                 DISCUTONS
             </a>
         </div>
     </div>
-    <div class="lg:col-span-5 flex justify-center lg:justify-end mt-12 lg:mt-0">
-        <div class="relative group floating">
-            <div class="w-64 h-64 md:w-80 md:h-80 relative z-10 border-2 border-primary overflow-hidden">
+    <div class="lg:col-span-5 flex justify-center lg:justify-end mt-8 sm:mt-12 lg:mt-0 px-2 sm:px-0">
+        <div class="relative group floating max-w-full">
+            <div class="w-52 h-52 sm:w-60 sm:h-60 md:w-64 md:h-64 lg:w-80 lg:h-80 relative z-10 border-2 border-primary overflow-hidden mx-auto">
                 <img alt="Maxwell Atsobeng" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105" src="{% static 'img/avatar.png' %}">
                 <div class="absolute inset-0 bg-primary/10 pointer-events-none mix-blend-overlay"></div>
             </div>
-            <div class="absolute -top-4 -right-4 bg-tertiary text-background font-black px-4 py-2 z-20 shadow-[4px_4px_0px_#131314]">
+            <div class="absolute -top-3 -right-2 sm:-top-4 sm:-right-4 bg-tertiary text-background font-black text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 z-20 shadow-[4px_4px_0px_#131314]">
                 LVL. 2026
             </div>
-            <div class="absolute -bottom-6 -left-6 w-full h-full border border-outline/20 -z-10"></div>
+            <div class="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 w-full h-full border border-outline/20 -z-10 pointer-events-none"></div>
             <div class="absolute top-1/2 -right-12 font-code-sm text-outline/30 rotate-90 tracking-widest hidden md:block">
                 //ID_SCAN_SUCCESS
             </div>
@@ -46,53 +48,53 @@
 </section>
 
 <!-- Projects Section -->
-<section class="mt-32" id="projects">
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-outline-variant/30 pb-4">
-        <div>
+<section class="mt-20 sm:mt-24 md:mt-32" id="projects">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-12 border-b border-outline-variant/30 pb-4">
+        <div class="min-w-0">
             <div class="font-code-sm text-primary mb-2">// SELECTED_WORKS</div>
-            <h2 class="font-headline-md text-headline-md text-on-surface">PORTEFEUILLE_SYSTEM</h2>
+            <h2 class="text-2xl sm:text-headline-md font-headline-md text-on-surface break-words">PORTEFEUILLE_SYSTEM</h2>
         </div>
-        <div class="flex gap-2 font-code-sm overflow-x-auto pb-2">
-            <button onclick="filterProjects('all')" class="filter-btn px-4 py-1 text-primary border border-primary/20 bg-primary/5" data-filter="all">[Tout_]</button>
-            <button onclick="filterProjects('WEB')" class="filter-btn px-4 py-1 text-on-surface-variant hover:text-primary transition-all" data-filter="WEB">[Web_Dev]</button>
-            <button onclick="filterProjects('GRAPHIC')" class="filter-btn px-4 py-1 text-on-surface-variant hover:text-primary transition-all" data-filter="GRAPHIC">[Graphic_Design]</button>
+        <div class="flex gap-2 font-code-sm overflow-x-auto pb-2 -mx-1 px-1 scrollbar-hide">
+            <button onclick="filterProjects('all')" class="filter-btn shrink-0 whitespace-nowrap px-3 sm:px-4 py-1 text-primary border border-primary/20 bg-primary/5" data-filter="all">[Tout_]</button>
+            <button onclick="filterProjects('WEB')" class="filter-btn shrink-0 whitespace-nowrap px-3 sm:px-4 py-1 text-on-surface-variant hover:text-primary transition-all" data-filter="WEB">[Web_Dev]</button>
+            <button onclick="filterProjects('GRAPHIC')" class="filter-btn shrink-0 whitespace-nowrap px-3 sm:px-4 py-1 text-on-surface-variant hover:text-primary transition-all" data-filter="GRAPHIC">[Graphic_Design]</button>
         </div>
     </div>
 
     <div id="project-grid" class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
         {% for project in projects %}
-        <div class="project-item {% cycle 'md:col-span-8' 'md:col-span-4' 'md:col-span-12' %} group terminal-window" data-category="{{ project.category }}">
-            <div class="terminal-header">
-                <div class="flex gap-1.5">
+        <div class="project-item {% cycle 'md:col-span-8' 'md:col-span-4' 'md:col-span-12' %} group terminal-window min-w-0" data-category="{{ project.category }}">
+            <div class="terminal-header gap-2">
+                <div class="flex gap-1.5 shrink-0">
                     <div class="w-2.5 h-2.5 rounded-full bg-outline/20"></div>
                     <div class="w-2.5 h-2.5 rounded-full bg-outline/20"></div>
                     <div class="w-2.5 h-2.5 rounded-full bg-outline/20"></div>
                 </div>
-                <div class="flex-1 text-center font-code-sm text-outline/50 text-[10px]">~/linx/projects/{{ project.slug }}.py</div>
-                <div class="font-label-caps text-[10px] {% if project.category == 'WEB' %}text-primary{% else %}text-tertiary{% endif %}">
+                <div class="flex-1 min-w-0 text-center font-code-sm text-outline/50 text-[9px] sm:text-[10px] truncate px-1">~/linx/projects/{{ project.slug }}.py</div>
+                <div class="font-label-caps text-[9px] sm:text-[10px] shrink-0 {% if project.category == 'WEB' %}text-primary{% else %}text-tertiary{% endif %}">
                     {% if project.category == 'WEB' %}#PYTHON{% else %}#DESIGN{% endif %}
                 </div>
             </div>
-            <div class="relative {% if forloop.counter|divisibleby:3 %}h-[300px]{% else %}h-[400px]{% endif %} overflow-hidden">
+            <div class="relative {% if forloop.counter|divisibleby:3 %}h-[240px] sm:h-[300px]{% else %}h-[280px] sm:h-[400px]{% endif %} overflow-hidden">
                 <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" alt="{{ project.title }}" src="{{ project.image.url }}">
                 <div class="absolute inset-0 bg-gradient-to-t from-background {% if forloop.counter|divisibleby:3 %}via-background/40{% else %}via-transparent{% endif %} to-transparent opacity-90"></div>
                 {% if forloop.counter|divisibleby:3 %}
-                <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
-                    <div class="font-label-caps text-label-caps text-primary border border-primary px-4 py-1 mb-4">{{ project.get_category_display|upper }}</div>
-                    <h3 class="font-display-xl text-4xl md:text-6xl text-on-surface uppercase mb-6 tracking-tighter">{{ project.title }}</h3>
-                    <a class="font-code-sm text-primary hover:underline flex items-center gap-2 border-b border-primary/30 flicker-animation" href="{% url 'project_detail' project.slug %}">
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4 sm:p-8">
+                    <div class="font-label-caps text-[10px] sm:text-label-caps text-primary border border-primary px-3 sm:px-4 py-1 mb-3 sm:mb-4">{{ project.get_category_display|upper }}</div>
+                    <h3 class="text-xl sm:text-4xl md:text-6xl font-black text-on-surface uppercase mb-4 sm:mb-6 tracking-tighter leading-tight px-2">{{ project.title }}</h3>
+                    <a class="font-code-sm text-primary hover:underline flex items-center gap-2 border-b border-primary/30 flicker-animation text-xs sm:text-sm" href="{% url 'project_detail' project.slug %}">
                         LIRE LE MANUEL // DOCS
                     </a>
                 </div>
                 {% else %}
-                <div class="absolute bottom-0 p-8 w-full flex justify-between items-end">
-                    <div>
-                        <h3 class="font-headline-md text-headline-md text-on-surface mb-2">{{ project.title|upper }}</h3>
-                        <div class="flex gap-2">
+                <div class="absolute bottom-0 p-4 sm:p-8 w-full flex flex-col sm:flex-row sm:justify-between sm:items-end gap-2 sm:gap-4">
+                    <div class="min-w-0">
+                        <h3 class="text-lg sm:text-headline-md font-headline-md text-on-surface mb-1 sm:mb-2 truncate sm:whitespace-normal">{{ project.title|upper }}</h3>
+                        <div class="flex gap-2 flex-wrap">
                             <span class="text-[10px] border border-outline/30 px-2 py-0.5 text-outline">{{ project.get_category_display|upper }}</span>
                         </div>
                     </div>
-                    <a class="font-code-sm text-primary hover:underline flex items-center gap-2 flicker-animation" href="{% url 'project_detail' project.slug %}">
+                    <a class="font-code-sm text-primary hover:underline flex items-center gap-2 flicker-animation shrink-0 text-xs sm:text-sm" href="{% url 'project_detail' project.slug %}">
                         Explorer →
                     </a>
                 </div>
@@ -109,20 +111,20 @@
 </section>
 
 <!-- Stack Section -->
-<section class="mt-32" id="stack">
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 border-b border-outline-variant/30 pb-4">
-        <div>
+<section class="mt-20 sm:mt-24 md:mt-32" id="stack">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-6 mb-6 sm:mb-8 border-b border-outline-variant/30 pb-4">
+        <div class="min-w-0">
             <div class="font-code-sm text-primary mb-2">// TECH_STACK</div>
-            <h2 class="font-headline-md text-headline-md text-on-surface">OUTILS &amp; TECHNOLOGIES</h2>
+            <h2 class="text-2xl sm:text-headline-md font-headline-md text-on-surface break-words">OUTILS &amp; TECHNOLOGIES</h2>
         </div>
-        <div class="font-code-sm text-outline text-[10px]">[SCROLL_INFINITE // LOOP_MODE]</div>
+        <div class="font-code-sm text-outline text-[10px] shrink-0">[SCROLL_INFINITE // LOOP_MODE]</div>
     </div>
 
-    <div class="marquee-container overflow-hidden border border-outline-variant/30 bg-surface-container-low py-6">
+    <div class="marquee-container overflow-hidden border border-outline-variant/30 bg-surface-container-low py-4 sm:py-6 -mx-margin-mobile px-0 sm:mx-0">
         <div class="marquee-track">
             {% for _ in "12" %}
-            <div class="flex items-center gap-12 px-6 shrink-0">
-                <span class="flex items-center gap-3 font-code-sm text-on-surface-variant whitespace-nowrap"><i class="fa-brands fa-python text-primary text-xl"></i> Python</span>
+            <div class="flex items-center gap-6 sm:gap-12 px-4 sm:px-6 shrink-0">
+                <span class="flex items-center gap-2 sm:gap-3 font-code-sm text-[11px] sm:text-sm text-on-surface-variant whitespace-nowrap"><i class="fa-brands fa-python text-primary text-lg sm:text-xl"></i> Python</span>
                 <span class="flex items-center gap-3 font-code-sm text-on-surface-variant whitespace-nowrap"><i class="fa-solid fa-d text-primary text-xl"></i> Django</span>
                 <span class="flex items-center gap-3 font-code-sm text-on-surface-variant whitespace-nowrap"><i class="fa-solid fa-bolt text-primary text-xl"></i> FastAPI</span>
                 <span class="flex items-center gap-3 font-code-sm text-on-surface-variant whitespace-nowrap"><i class="fa-solid fa-flask text-primary text-xl"></i> Flask</span>
@@ -156,124 +158,124 @@
 </section>
 
 <!-- Expertise Section -->
-<section class="mt-32" id="expertise">
-    <div class="mb-12 border-b border-outline-variant/30 pb-4">
+<section class="mt-20 sm:mt-24 md:mt-32" id="expertise">
+    <div class="mb-8 sm:mb-12 border-b border-outline-variant/30 pb-4">
         <div class="font-code-sm text-primary mb-2">// DOMAINS_OF_EXPERTISE</div>
-        <h2 class="font-headline-md text-headline-md text-on-surface">DOMAINES D'INTERVENTION</h2>
+        <h2 class="text-2xl sm:text-headline-md font-headline-md text-on-surface break-words">DOMAINES D'INTERVENTION</h2>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-        <div class="terminal-window p-6 hover:border-primary/50 transition-colors group">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-gutter">
+        <div class="terminal-window p-5 sm:p-6 hover:border-primary/50 transition-colors group min-w-0">
             <div class="flex justify-between items-start mb-4">
                 <span class="material-symbols-outlined text-primary text-3xl">language</span>
                 <span class="font-label-caps text-[10px] text-outline border border-outline-variant/50 px-2 py-0.5">WEB</span>
             </div>
-            <h3 class="font-headline-md text-lg text-on-surface mb-2 group-hover:text-primary transition-colors">Développement Web Full-Stack</h3>
+            <h3 class="text-base sm:text-lg font-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">Développement Web Full-Stack</h3>
             <p class="font-code-sm text-on-surface-variant text-sm">Applications Django, React, APIs REST — du backend Python au frontend interactif.</p>
         </div>
-        <div class="terminal-window p-6 hover:border-primary/50 transition-colors group">
+        <div class="terminal-window p-5 sm:p-6 hover:border-primary/50 transition-colors group min-w-0">
             <div class="flex justify-between items-start mb-4">
                 <span class="material-symbols-outlined text-primary text-3xl">hub</span>
                 <span class="font-label-caps text-[10px] text-outline border border-outline-variant/50 px-2 py-0.5">API</span>
             </div>
-            <h3 class="font-headline-md text-lg text-on-surface mb-2 group-hover:text-primary transition-colors">APIs &amp; Microservices</h3>
+            <h3 class="text-base sm:text-lg font-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">APIs &amp; Microservices</h3>
             <p class="font-code-sm text-on-surface-variant text-sm">Architecture FastAPI / Flask, intégration de services et automatisation de flux.</p>
         </div>
-        <div class="terminal-window p-6 hover:border-primary/50 transition-colors group">
+        <div class="terminal-window p-5 sm:p-6 hover:border-primary/50 transition-colors group min-w-0">
             <div class="flex justify-between items-start mb-4">
                 <span class="material-symbols-outlined text-tertiary text-3xl">analytics</span>
                 <span class="font-label-caps text-[10px] text-outline border border-outline-variant/50 px-2 py-0.5">DATA</span>
             </div>
-            <h3 class="font-headline-md text-lg text-on-surface mb-2 group-hover:text-primary transition-colors">Data &amp; Visualisation</h3>
+            <h3 class="text-base sm:text-lg font-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">Data &amp; Visualisation</h3>
             <p class="font-code-sm text-on-surface-variant text-sm">Traitement de données Python, dashboards et visualisations techniques.</p>
         </div>
-        <div class="terminal-window p-6 hover:border-primary/50 transition-colors group">
+        <div class="terminal-window p-5 sm:p-6 hover:border-primary/50 transition-colors group min-w-0">
             <div class="flex justify-between items-start mb-4">
                 <span class="material-symbols-outlined text-primary text-3xl">cloud</span>
                 <span class="font-label-caps text-[10px] text-outline border border-outline-variant/50 px-2 py-0.5">OPS</span>
             </div>
-            <h3 class="font-headline-md text-lg text-on-surface mb-2 group-hover:text-primary transition-colors">DevOps &amp; Déploiement</h3>
+            <h3 class="text-base sm:text-lg font-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">DevOps &amp; Déploiement</h3>
             <p class="font-code-sm text-on-surface-variant text-sm">Docker, Linux, CI/CD, hébergement cloud (Render, Heroku) et serveurs Nginx.</p>
         </div>
-        <div class="terminal-window p-6 hover:border-primary/50 transition-colors group">
+        <div class="terminal-window p-5 sm:p-6 hover:border-primary/50 transition-colors group min-w-0">
             <div class="flex justify-between items-start mb-4">
                 <span class="material-symbols-outlined text-tertiary text-3xl">palette</span>
                 <span class="font-label-caps text-[10px] text-outline border border-outline-variant/50 px-2 py-0.5">DESIGN</span>
             </div>
-            <h3 class="font-headline-md text-lg text-on-surface mb-2 group-hover:text-primary transition-colors">UI/UX &amp; Identité Visuelle</h3>
+            <h3 class="text-base sm:text-lg font-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">UI/UX &amp; Identité Visuelle</h3>
             <p class="font-code-sm text-on-surface-variant text-sm">Design systems, maquettes Figma/XD, branding et interfaces brutales.</p>
         </div>
-        <div class="terminal-window p-6 hover:border-primary/50 transition-colors group">
+        <div class="terminal-window p-5 sm:p-6 hover:border-primary/50 transition-colors group min-w-0">
             <div class="flex justify-between items-start mb-4">
                 <span class="material-symbols-outlined text-tertiary text-3xl">movie</span>
                 <span class="font-label-caps text-[10px] text-outline border border-outline-variant/50 px-2 py-0.5">MEDIA</span>
             </div>
-            <h3 class="font-headline-md text-lg text-on-surface mb-2 group-hover:text-primary transition-colors">Motion &amp; Production Média</h3>
+            <h3 class="text-base sm:text-lg font-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">Motion &amp; Production Média</h3>
             <p class="font-code-sm text-on-surface-variant text-sm">Montage Filmora, assets print (InDesign) et contenus visuels multi-supports.</p>
         </div>
-        <div class="terminal-window p-6 hover:border-primary/50 transition-colors group">
+        <div class="terminal-window p-5 sm:p-6 hover:border-primary/50 transition-colors group min-w-0">
             <div class="flex justify-between items-start mb-4">
                 <span class="material-symbols-outlined text-tertiary text-3xl">sports_esports</span>
                 <span class="font-label-caps text-[10px] text-outline border border-outline-variant/50 px-2 py-0.5">GAME</span>
             </div>
-            <h3 class="font-headline-md text-lg text-on-surface mb-2 group-hover:text-primary transition-colors">Jeux &amp; Interactivité</h3>
+            <h3 class="text-base sm:text-lg font-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">Jeux &amp; Interactivité</h3>
             <p class="font-code-sm text-on-surface-variant text-sm">Expériences Pygame, logique de jeu et interfaces interactives.</p>
         </div>
-        <div class="terminal-window p-6 hover:border-primary/50 transition-colors group">
+        <div class="terminal-window p-5 sm:p-6 hover:border-primary/50 transition-colors group min-w-0">
             <div class="flex justify-between items-start mb-4">
                 <span class="material-symbols-outlined text-primary text-3xl">view_in_ar</span>
                 <span class="font-label-caps text-[10px] text-outline border border-outline-variant/50 px-2 py-0.5">3D</span>
             </div>
-            <h3 class="font-headline-md text-lg text-on-surface mb-2 group-hover:text-primary transition-colors">3D &amp; WebGL</h3>
+            <h3 class="text-base sm:text-lg font-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">3D &amp; WebGL</h3>
             <p class="font-code-sm text-on-surface-variant text-sm">Scènes Three.js, shaders et expériences immersives dans le navigateur.</p>
         </div>
-        <div class="terminal-window p-6 hover:border-primary/50 transition-colors group">
+        <div class="terminal-window p-5 sm:p-6 hover:border-primary/50 transition-colors group min-w-0">
             <div class="flex justify-between items-start mb-4">
                 <span class="material-symbols-outlined text-primary text-3xl">terminal</span>
                 <span class="font-label-caps text-[10px] text-outline border border-outline-variant/50 px-2 py-0.5">AUTO</span>
             </div>
-            <h3 class="font-headline-md text-lg text-on-surface mb-2 group-hover:text-primary transition-colors">Automatisation &amp; Scripting</h3>
+            <h3 class="text-base sm:text-lg font-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">Automatisation &amp; Scripting</h3>
             <p class="font-code-sm text-on-surface-variant text-sm">Scripts Bash/Python, pipelines et outils d'optimisation de workflows.</p>
         </div>
-        <div class="terminal-window p-6 hover:border-primary/50 transition-colors group">
+        <div class="terminal-window p-5 sm:p-6 hover:border-primary/50 transition-colors group min-w-0">
             <div class="flex justify-between items-start mb-4">
                 <span class="material-symbols-outlined text-primary text-3xl">description</span>
                 <span class="font-label-caps text-[10px] text-outline border border-outline-variant/50 px-2 py-0.5">DOC</span>
             </div>
-            <h3 class="font-headline-md text-lg text-on-surface mb-2 group-hover:text-primary transition-colors">Bureautique &amp; Documentation</h3>
+            <h3 class="text-base sm:text-lg font-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">Bureautique &amp; Documentation</h3>
             <p class="font-code-sm text-on-surface-variant text-sm">Latex, Word, Excel, PowerPoint — rapports, présentations et livrables professionnels.</p>
         </div>
     </div>
 </section>
 
 <!-- CTA Section -->
-<section class="mt-32 mb-8" id="cta">
+<section class="mt-20 sm:mt-24 md:mt-32 mb-4 sm:mb-8" id="cta">
     <div class="terminal-window relative overflow-hidden">
-        <div class="terminal-header">
-            <div class="flex gap-1.5">
+        <div class="terminal-header gap-2">
+            <div class="flex gap-1.5 shrink-0">
                 <div class="w-2.5 h-2.5 rounded-full bg-outline/20"></div>
                 <div class="w-2.5 h-2.5 rounded-full bg-outline/20"></div>
                 <div class="w-2.5 h-2.5 rounded-full bg-outline/20"></div>
             </div>
-            <div class="flex-1 text-center font-code-sm text-outline/50 text-[10px]">~/linx/portfolio/init_collaboration.sh</div>
-            <div class="font-label-caps text-[10px] text-tertiary">#CTA</div>
+            <div class="flex-1 min-w-0 text-center font-code-sm text-outline/50 text-[9px] sm:text-[10px] truncate px-1">~/linx/portfolio/init_collaboration.sh</div>
+            <div class="font-label-caps text-[9px] sm:text-[10px] text-tertiary shrink-0">#CTA</div>
         </div>
-        <div class="p-10 md:p-16 text-center relative">
+        <div class="p-6 sm:p-10 md:p-16 text-center relative">
             <div class="absolute inset-0 bg-primary/5 pointer-events-none"></div>
             <div class="relative z-10">
-                <div class="font-code-sm text-tertiary mb-4">[READY_FOR_DEPLOYMENT]</div>
-                <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface uppercase mb-6 tracking-tighter">
+                <div class="font-code-sm text-tertiary mb-3 sm:mb-4 text-xs sm:text-sm">[READY_FOR_DEPLOYMENT]</div>
+                <h2 class="text-[1.75rem] leading-tight sm:font-headline-lg-mobile md:font-headline-lg sm:text-headline-lg-mobile md:text-headline-lg text-on-surface uppercase mb-4 sm:mb-6 tracking-tighter">
                     UN PROJET EN TÊTE ?
                 </h2>
-                <p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto mb-10">
+                <p class="font-body-md sm:font-body-lg text-sm sm:text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-8 sm:mb-10 px-1">
                     Que ce soit une application web, une identité visuelle ou une automatisation sur mesure — construisons ensemble votre prochain système numérique.
                 </p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="{% url 'contact' %}" class="btn-terminal bg-transparent border-2 border-primary text-primary px-10 py-4 font-label-caps text-label-caps inline-flex items-center gap-2">
+                <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
+                    <a href="{% url 'contact' %}" class="btn-terminal bg-transparent border-2 border-primary text-primary px-6 sm:px-10 py-3 sm:py-4 font-label-caps text-[10px] sm:text-label-caps inline-flex items-center justify-center gap-2 w-full sm:w-auto">
                         &gt; LANCER UN PROJET
-                        <span class="material-symbols-outlined">arrow_forward</span>
+                        <span class="material-symbols-outlined text-lg">arrow_forward</span>
                     </a>
-                    <a href="https://wa.me/237650218023" target="_blank" rel="noopener" class="btn-terminal border border-outline text-on-surface-variant px-10 py-4 font-label-caps text-label-caps inline-flex items-center gap-2 hover:border-tertiary hover:text-tertiary">
+                    <a href="https://wa.me/237650218023" target="_blank" rel="noopener" class="btn-terminal border border-outline text-on-surface-variant px-6 sm:px-10 py-3 sm:py-4 font-label-caps text-[10px] sm:text-label-caps inline-flex items-center justify-center gap-2 hover:border-tertiary hover:text-tertiary w-full sm:w-auto">
                         <i class="fa-brands fa-whatsapp"></i>
                         DISCUTONS
                     </a>
@@ -292,9 +294,9 @@ function filterProjects(category) {
 
     buttons.forEach(btn => {
         if (btn.dataset.filter === category) {
-            btn.className = 'filter-btn px-4 py-1 text-primary border border-primary/20 bg-primary/5';
+            btn.className = 'filter-btn shrink-0 whitespace-nowrap px-3 sm:px-4 py-1 text-primary border border-primary/20 bg-primary/5';
         } else {
-            btn.className = 'filter-btn px-4 py-1 text-on-surface-variant hover:text-primary transition-all';
+            btn.className = 'filter-btn shrink-0 whitespace-nowrap px-3 sm:px-4 py-1 text-on-surface-variant hover:text-primary transition-all';
         }
     });
 
