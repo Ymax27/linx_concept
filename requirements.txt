@@ -1,7 +1,7 @@
 asgiref==3.11.0
 Django==6.0.8
 Markdown==3.10
-pillow==12.3.0
+pillow==13.0.0
 Pygments==2.20.0
 sqlparse==0.6.0
 whitenoise==6.11.0
